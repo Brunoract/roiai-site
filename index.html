@@ -4,529 +4,440 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROI.ai — Business Performance</title>
-<meta name="description" content="Seu negócio no próximo nível. Com estratégia, dados e ROI calculado. Crescimento empresarial com foco em resultado.">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #181818;
-    --bg4: #202020;
-    --neon: #39ff14;
-    --neon2: #57ff3a;
-    --neon-glow: rgba(57,255,20,0.10);
-    --neon-border: rgba(57,255,20,0.28);
-    --silver: #c8c8c8;
-    --silver-bright: linear-gradient(90deg, #fff 0%, #c0c0c0 30%, #f0f0f0 50%, #909090 70%, #e0e0e0 100%);
-    --white-dim: rgba(200,200,200,0.55);
-    --white-faint: rgba(200,200,200,0.05);
-    --border: rgba(255,255,255,0.07);
-    --red: #ff3d3d;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--silver);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* GLOW */
-  .glow-top {
-    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
-    width: 800px; height: 600px;
-    background: radial-gradient(ellipse, rgba(57,255,20,0.04) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 48px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(20px);
-    z-index: 100;
-  }
-
-  .nav-logo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px; font-weight: 900;
-    letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
-  }
-
-  .nav-logo-dot { width: 6px; height: 6px; background: var(--neon); border-radius: 50%; box-shadow: 0 0 8px var(--neon); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  .nav-logo-roi { background: linear-gradient(90deg,#fff,#c0c0c0,#f0f0f0,#909090); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .nav-logo-ai { color: var(--neon); -webkit-text-fill-color: var(--neon); text-shadow: 0 0 8px var(--neon); }
-
-  .nav-links { display: flex; align-items: center; gap: 8px; }
-
-  .nav-link {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    color: var(--white-dim); text-decoration: none;
-    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
-    padding: 6px 12px; border-radius: 6px;
-    transition: all 0.2s; cursor: pointer;
-  }
-
-  .nav-link i { font-size: 16px; }
-  .nav-link:hover { color: var(--silver); background: var(--white-faint); }
-
-  .nav-cta {
-    background: transparent; border: 1px solid var(--neon-border);
-    color: var(--neon); font-family: 'Orbitron', sans-serif;
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 9px 20px; border-radius: 4px; cursor: pointer; text-decoration: none;
-    transition: all 0.2s; text-shadow: 0 0 6px var(--neon);
-    box-shadow: 0 0 12px rgba(57,255,20,0.1);
-    margin-left: 8px;
-  }
-
-  .nav-cta:hover { background: rgba(57,255,20,0.08); box-shadow: 0 0 20px rgba(57,255,20,0.25); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 120px 24px 80px; text-align: center; position: relative; z-index: 1;
-  }
-
-  .hero-logo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(56px, 11vw, 96px);
-    font-weight: 900; letter-spacing: 4px; line-height: 1;
-    margin-bottom: 8px;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-
-  .hero-logo-roi { background: linear-gradient(135deg,#fff 0%,#c0c0c0 40%,#e8e8e8 60%,#888 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 2px rgba(200,200,200,0.2)); }
-  .hero-logo-ai { color: var(--neon); -webkit-text-fill-color: var(--neon); text-shadow: 0 0 16px var(--neon), 0 0 32px rgba(57,255,20,0.3); }
-
-  .hero-slogan {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px; font-weight: 600; letter-spacing: 6px; text-transform: uppercase;
-    color: var(--neon); text-shadow: 0 0 8px var(--neon);
-    margin-bottom: 28px; display: block;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-desc {
-    font-size: 15px; font-weight: 300; color: var(--white-dim);
-    max-width: 400px; margin: 0 auto 36px; line-height: 1.7;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; animation: fadeUp 0.6s 0.4s ease both; }
-
-  .btn-primary {
-    background: transparent; border: 1px solid var(--neon-border);
-    color: var(--neon); font-family: 'Orbitron', sans-serif;
-    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    padding: 15px 40px; border-radius: 4px; cursor: pointer; text-decoration: none;
-    transition: all 0.3s; box-shadow: 0 0 20px rgba(57,255,20,0.15);
-    text-shadow: 0 0 8px var(--neon); position: relative; overflow: hidden;
-  }
-
-  .btn-primary::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(57,255,20,0.1),transparent); transition:left 0.5s; }
-  .btn-primary:hover { background:rgba(57,255,20,0.07); box-shadow:0 0 40px rgba(57,255,20,0.3); transform:translateY(-2px); }
-  .btn-primary:hover::before { left:100%; }
-
-  .btn-secondary {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--white-dim); font-family: 'Inter', sans-serif;
-    font-size: 13px; font-weight: 400; padding: 15px 28px;
-    border-radius: 4px; cursor: pointer; text-decoration: none; transition: all 0.2s;
-  }
-  .btn-secondary:hover { border-color: rgba(200,200,200,0.2); color: var(--silver); }
-
-  .hero-stats { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.5s ease both; }
-  .stat { text-align: center; }
-  .stat-num { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; display: block; line-height: 1; background: linear-gradient(135deg,#fff,#c0c0c0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .stat-num.green { color: var(--neon); -webkit-text-fill-color: var(--neon); text-shadow: 0 0 12px var(--neon); }
-  .stat-label { font-size: 10px; color: var(--white-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; display: block; }
-
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-  /* SECTIONS */
-  section { padding: 96px 24px; position: relative; z-index: 1; }
-  .section-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-  .section-tag { font-family:'Orbitron',sans-serif; font-size:9px; font-weight:700; letter-spacing:5px; text-transform:uppercase; color:var(--neon); text-shadow:0 0 8px var(--neon); display:block; text-align:center; margin-bottom:14px; }
-  .section-h2 { font-family:'Orbitron',sans-serif; font-size:clamp(22px,4vw,36px); font-weight:900; text-align:center; margin-bottom:12px; letter-spacing:-0.5px; background:linear-gradient(135deg,#fff 0%,#c0c0c0 50%,#e0e0e0 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .section-sub { font-size:14px; color:var(--white-dim); text-align:center; max-width:440px; margin:0 auto 56px; line-height:1.7; }
-
-  .container { max-width: 1100px; margin: 0 auto; }
-
-  /* PAIN */
-  .pain-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:800px; margin:0 auto; }
-  .pain-card { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:24px 20px; display:flex; gap:16px; align-items:flex-start; transition:border-color 0.2s; }
-  .pain-card:hover { border-color:rgba(255,61,61,0.25); }
-  .pain-icon { width:42px; height:42px; border-radius:8px; background:rgba(255,61,61,0.08); border:1px solid rgba(255,61,61,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:18px; color:#ff6b6b; }
-  .pain-card h3 { font-size:13px; font-weight:600; color:var(--silver); margin-bottom:6px; }
-  .pain-card p { font-size:12px; color:var(--white-dim); line-height:1.6; }
-
-  /* BEFORE AFTER */
-  .ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:800px; margin:0 auto; }
-  .ba-card { border-radius:10px; padding:28px 24px; border:1px solid var(--border); }
-  .ba-before { background:var(--bg3); }
-  .ba-after { background:var(--bg2); border-color:var(--neon-border); box-shadow:0 0 20px rgba(57,255,20,0.05); }
-  .ba-label { font-family:'Orbitron',sans-serif; font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:18px; display:block; }
-  .ba-before .ba-label { color:var(--white-dim); }
-  .ba-after .ba-label { color:var(--neon); text-shadow:0 0 6px var(--neon); }
-  .ba-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; font-size:13px; color:var(--white-dim); line-height:1.5; }
-  .ba-item i { margin-top:2px; flex-shrink:0; font-size:13px; }
-
-  /* DELIVERS */
-  .delivers-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; max-width:1000px; margin:0 auto; }
-  .deliver-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px 16px; text-align:center; transition:all 0.2s; position:relative; overflow:hidden; }
-  .deliver-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--neon),transparent); opacity:0; transition:opacity 0.2s; }
-  .deliver-card:hover { border-color:var(--neon-border); transform:translateY(-2px); }
-  .deliver-card:hover::before { opacity:1; }
-  .deliver-card.soon { border-style:dashed; border-color:var(--neon-border); opacity:0.7; }
-  .soon-badge { position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--neon); color:#0a0a0a; font-family:'Orbitron',sans-serif; font-size:8px; font-weight:900; letter-spacing:1.5px; padding:3px 10px; border-radius:0 0 6px 6px; white-space:nowrap; }
-  .deliver-icon { font-size:24px; color:var(--neon); margin-bottom:10px; display:block; }
-  .deliver-card.soon .deliver-icon { color:var(--white-dim); }
-  .deliver-card h3 { font-size:12px; font-weight:500; color:var(--silver); }
-  .deliver-card.soon h3 { color:var(--white-dim); }
-
-  /* CASES */
-  .cases-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; max-width:1000px; margin:0 auto; }
-  .case-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:24px 20px; transition:border-color 0.2s; }
-  .case-card:hover { border-color:var(--neon-border); }
-  .case-result { font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--neon); text-shadow:0 0 10px var(--neon); margin-bottom:2px; }
-  .case-time { font-size:10px; color:var(--white-dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; display:block; }
-  .case-text { font-size:13px; color:var(--white-dim); line-height:1.7; margin-bottom:16px; font-style:italic; }
-  .case-author { display:flex; align-items:center; gap:10px; }
-  .case-avatar { width:36px; height:36px; border-radius:8px; background:var(--bg3); border:1px solid var(--neon-border); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; color:var(--neon); flex-shrink:0; }
-  .case-name { font-size:13px; font-weight:500; color:var(--silver); }
-  .case-role { font-size:11px; color:var(--white-dim); margin-top:1px; }
-
-  /* PRICING */
-  .pricing-wrapper { max-width:900px; margin:0 auto; }
-
-  .pricing-comparison { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:40px; }
-  .comp-card { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:20px; text-align:center; }
-  .comp-card.highlight { border-color:var(--neon-border); background:var(--bg2); }
-  .comp-label { font-size:10px; color:var(--white-dim); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; display:block; }
-  .comp-price { font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--silver); display:block; margin-bottom:4px; }
-  .comp-price.strike { text-decoration:line-through; color:var(--white-dim); font-size:16px; }
-  .comp-price.neon { color:var(--neon); text-shadow:0 0 10px var(--neon); }
-  .comp-save { font-size:11px; color:var(--neon); font-weight:600; display:block; }
-  .comp-desc { font-size:11px; color:var(--white-dim); line-height:1.5; margin-top:6px; }
-
-  .pricing-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .price-card { border-radius:10px; padding:32px 28px; border:1px solid var(--border); background:var(--bg2); }
-  .price-card.featured { border-color:var(--neon-border); box-shadow:0 0 30px rgba(57,255,20,0.06); }
-  .price-badge { display:inline-block; background:var(--neon); color:#0a0a0a; font-family:'Orbitron',sans-serif; font-size:8px; font-weight:900; letter-spacing:2px; padding:3px 12px; border-radius:20px; margin-bottom:16px; }
-  .price-plan { font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--white-dim); margin-bottom:16px; display:block; }
-  .price-val { font-family:'Orbitron',sans-serif; font-size:48px; font-weight:900; line-height:1; color:var(--silver); }
-  .price-val.neon { color:var(--neon); text-shadow:0 0 16px var(--neon); }
-  .price-period { font-size:12px; color:var(--white-dim); margin-bottom:6px; display:block; }
-  .price-annual { font-size:11px; color:var(--neon); font-weight:600; margin-bottom:20px; display:block; }
-  .price-desc { font-size:13px; color:var(--white-dim); margin-bottom:22px; line-height:1.6; }
-  .price-feat { list-style:none; margin-bottom:26px; }
-  .price-feat li { font-size:12px; color:var(--white-dim); padding:7px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
-  .price-feat li:last-child { border-bottom:none; }
-  .feat-on { color:var(--neon); font-size:13px; }
-  .feat-off { color:rgba(200,200,200,0.2); font-size:13px; }
-  .feat-locked { color:rgba(200,200,200,0.2); text-decoration:line-through; }
-  .price-btn { width:100%; padding:13px; border-radius:6px; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; text-decoration:none; display:block; text-align:center; }
-  .price-btn.free { background:transparent; border:1px solid var(--border); color:var(--white-dim); }
-  .price-btn.free:hover { border-color:rgba(200,200,200,0.2); color:var(--silver); }
-  .price-btn.pro { background:transparent; border:1px solid var(--neon-border); color:var(--neon); box-shadow:0 0 16px rgba(57,255,20,0.12); text-shadow:0 0 6px var(--neon); }
-  .price-btn.pro:hover { background:rgba(57,255,20,0.08); box-shadow:0 0 30px rgba(57,255,20,0.25); }
-
-  .price-disclaimer { text-align:center; margin-top:20px; font-size:11px; color:var(--white-dim); }
-
-  /* CTA FINAL */
-  .cta-final { text-align:center; padding:100px 24px; position:relative; overflow:hidden; }
-  .cta-final::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:400px; background:radial-gradient(ellipse,rgba(57,255,20,0.05) 0%,transparent 70%); pointer-events:none; }
-  .cta-final h2 { font-family:'Orbitron',sans-serif; font-size:clamp(24px,4vw,44px); font-weight:900; margin-bottom:14px; letter-spacing:-0.5px; background:linear-gradient(135deg,#fff,#c0c0c0,#e0e0e0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .cta-final p { font-size:15px; color:var(--white-dim); margin-bottom:36px; }
-
-  /* FOOTER */
-  footer { border-top:1px solid var(--border); padding:36px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
-  .footer-logo { font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; letter-spacing:2px; display:flex; align-items:center; gap:8px; }
-  .f-roi { background:linear-gradient(90deg,#fff,#c0c0c0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .f-ai { color:var(--neon); -webkit-text-fill-color:var(--neon); }
-  .footer-links { display:flex; gap:20px; flex-wrap:wrap; }
-  .footer-links a { font-size:12px; color:var(--white-dim); text-decoration:none; transition:color 0.2s; }
-  .footer-links a:hover { color:var(--silver); }
-  .footer-copy { font-size:11px; color:rgba(200,200,200,0.2); }
-
-  /* MOBILE */
-  @media(max-width:768px){
-    nav { padding:12px 20px; }
-    .nav-link span { display:none; }
-    section { padding:64px 20px; }
-    .pain-grid { grid-template-columns:1fr; }
-    .ba-grid { grid-template-columns:1fr; }
-    .pricing-comparison { grid-template-columns:1fr; }
-    .pricing-grid { grid-template-columns:1fr; }
-    footer { padding:28px 20px; flex-direction:column; align-items:flex-start; }
-    .hero-stats { gap:28px; }
-  }
-
-  /* LINK ICONS - using unicode fallback */
-  .icon-home::before { content:'⌂'; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script type="application/json" id="sp">"# PROMPT MESTRE \u2014 ROI.ai v4.0\n# Business Operating System para Empresas de Qualquer Tamanho\n# Vers\u00e3o: 4.0 | Autor: Bruno Ract | Maio 2026\n# Modelo: claude-sonnet-4-5\n\n---\n\n## IDENTIDADE\n\nVoc\u00ea \u00e9 o **ROI.ai** \u2014 o primeiro Business Operating System do mundo para micro, pequenas e m\u00e9dias empresas. Criado por Bruno Ract com base em 20 anos de experi\u00eancia em estrat\u00e9gia, vendas B2B e marketing industrial atendendo empresas como AMBEV, Unilever, L'Or\u00e9al, Colgate-Palmolive, Carrefour e Walmart.\n\nVoc\u00ea opera em **3 n\u00edveis simult\u00e2neos:**\n- **N\u00edvel 1 \u2014 Estrat\u00e9gico:** Consultoria com IA \u2014 planos, ROI, cen\u00e1rios, frameworks\n- **N\u00edvel 2 \u2014 Gest\u00e3o:** Agentes aut\u00f4nomos que executam e reportam automaticamente\n- **N\u00edvel 3 \u2014 Operacional:** ERP integrado comandado pelos agentes via protocolo MCP\n\nO empres\u00e1rio \u00e9 o **ORQUESTRADOR**. Voc\u00ea \u00e9 o cockpit.\n\n## MISS\u00c3O\n\nEntregar a clareza, o plano e a execu\u00e7\u00e3o que transformam qualquer empresa \u2014 do solopreneur ao departamento de multinacional \u2014 em uma opera\u00e7\u00e3o orientada a dados, ROI e crescimento sustent\u00e1vel.\n\n## TOM DE VOZ\n\n- Direto, executivo, confi\u00e1vel \u2014 empres\u00e1rio falando com empres\u00e1rio\n- Adapte a linguagem ao porte: MEI fala simples, grande empresa fala corporativo\n- ZERO jarg\u00e3o desnecess\u00e1rio\n- Explique termos t\u00e9cnicos na primeira men\u00e7\u00e3o\n- Frases curtas. Verbos no presente. Comando, n\u00e3o sugest\u00e3o\n- NUNCA use \"talvez\", \"quem sabe\", \"se poss\u00edvel\"\n- USE \"fa\u00e7a\", \"implemente\", \"corte\", \"ajuste\", \"execute\"\n- **SEMPRE termine com CTA claro, op\u00e7\u00f5es de escolha ou pergunta de avan\u00e7o**\n- **NUNCA entregue um bloco sem dizer o que fazer em seguida**\n\n## IDIOMA\n\nDetecte o idioma do usu\u00e1rio automaticamente e responda no mesmo idioma.\nIdiomas suportados: Portugu\u00eas (BR), English (US/UK), Espa\u00f1ol, Fran\u00e7ais, Deutsch.\n\n---\n\n## FLUXO OBRIGAT\u00d3RIO \u2014 5 FILTROS DE ONBOARDING\n\n**ANTES de qualquer plano ou recomenda\u00e7\u00e3o, conduza os 5 filtros.**\nFa\u00e7a UMA pergunta por vez. Espere a resposta. Avance.\n\n### ABERTURA\n\n> \"Ol\u00e1! Sou o ROI.ai \u2014 seu Business Operating System completo.\n>\n> Antes de gerar seu plano personalizado, preciso entender exatamente quem \u00e9 sua empresa e o que voc\u00ea precisa. S\u00e3o 5 perguntas r\u00e1pidas \u2014 menos de 3 minutos.\n>\n> Pronto para come\u00e7ar?\"\n\n---\n\n### FILTRO 1 \u2014 TIPO DE EMPRESA\n\n> \"Qual melhor descreve sua empresa?\n>\n> 1\ufe0f\u20e3 **Startup** \u2014 nascida para crescer em escala r\u00e1pida, buscando product-market fit ou capta\u00e7\u00e3o\n> 2\ufe0f\u20e3 **Empresa Tradicional** \u2014 com\u00e9rcio, servi\u00e7os, ind\u00fastria, agro, sa\u00fade, educa\u00e7\u00e3o etc.\n> 3\ufe0f\u20e3 **Departamento / Business Unit** \u2014 \u00e1rea dentro de uma empresa de 250+ funcion\u00e1rios\n> 4\ufe0f\u20e3 **Ainda n\u00e3o tenho empresa** \u2014 quero abrir um neg\u00f3cio do zero\"\n\n---\n\n### FILTRO 2 \u2014 FASE ATUAL\n\n**Se Startup:**\n> \"Em qual fase sua startup est\u00e1?\n>\n> 1\ufe0f\u20e3 **Idea\u00e7\u00e3o** \u2014 tenho a ideia, ainda sem produto ou receita\n> 2\ufe0f\u20e3 **Valida\u00e7\u00e3o (MVP)** \u2014 produto lan\u00e7ado, primeiros usu\u00e1rios, buscando PMF\n> 3\ufe0f\u20e3 **Tra\u00e7\u00e3o** \u2014 MRR crescendo, primeiros pagantes, escalando aquisi\u00e7\u00e3o\n> 4\ufe0f\u20e3 **Growth** \u2014 $50k\u2013$500k MRR, time estruturado, escalando\n> 5\ufe0f\u20e3 **Expans\u00e3o** \u2014 S\u00e9rie A/B+, novos mercados\"\n\n**Se Empresa Tradicional:**\n> \"Em qual fase seu neg\u00f3cio est\u00e1?\n>\n> 1\ufe0f\u20e3 **Abrindo** \u2014 menos de 12 meses, estruturando tudo\n> 2\ufe0f\u20e3 **Estabilizando** \u2014 1\u20133 anos, receita b\u00e1sica, sem crescimento consistente\n> 3\ufe0f\u20e3 **Crescendo** \u2014 3\u20137 anos, crescimento constante, time se formando\n> 4\ufe0f\u20e3 **Maduro** \u2014 7+ anos, posi\u00e7\u00e3o estabelecida, buscando reinven\u00e7\u00e3o\n> 5\ufe0f\u20e3 **Transformando** \u2014 qualquer fase, digitalizando ou mudando modelo\"\n\n**Se Abrindo do zero:**\n> \"Que tipo de neg\u00f3cio quer abrir?\n>\n> 1\ufe0f\u20e3 Startup / tech / digital\n> 2\ufe0f\u20e3 Com\u00e9rcio / varejo\n> 3\ufe0f\u20e3 Servi\u00e7os / consultoria\n> 4\ufe0f\u20e3 Ind\u00fastria / manufatura\n> 5\ufe0f\u20e3 Agroneg\u00f3cio\n> 6\ufe0f\u20e3 Sa\u00fade / educa\u00e7\u00e3o\n> 7\ufe0f\u20e3 Outro \u2014 me conta\"\n\n---\n\n### FILTRO 3 \u2014 TAMANHO\n\n> \"Quantas pessoas trabalham na sua empresa hoje (incluindo voc\u00ea)?\n>\n> 1\ufe0f\u20e3 **Solo / 1 pessoa** \u2014 fa\u00e7o tudo sozinho\n> 2\ufe0f\u20e3 **Micro \u2014 2 a 9** \u2014 pequena equipe\n> 3\ufe0f\u20e3 **Pequena \u2014 10 a 49** \u2014 estrutura em forma\u00e7\u00e3o\n> 4\ufe0f\u20e3 **M\u00e9dia \u2014 50 a 249** \u2014 empresa estabelecida\n> 5\ufe0f\u20e3 **Grande \u2014 250+** \u2014 grande empresa ou departamento\"\n\n---\n\n### FILTRO 4 \u2014 MOMENTO ATUAL\n\n> \"Qual melhor descreve seu momento agora?\n>\n> 1\ufe0f\u20e3 Estou come\u00e7ando do zero e preciso estruturar tudo antes de investir\n> 2\ufe0f\u20e3 Tenho empresa ativa mas preciso de um plano para crescer\n> 3\ufe0f\u20e3 Minha empresa est\u00e1 estagnada e preciso de nova estrat\u00e9gia\n> 4\ufe0f\u20e3 Estou em crise \u2014 queda de receita, caixa negativo ou problema operacional\n> 5\ufe0f\u20e3 Quero automatizar a opera\u00e7\u00e3o e reduzir custos com IA\n> 6\ufe0f\u20e3 Quero captar investimento e preciso me preparar\n> 7\ufe0f\u20e3 Quero expandir para novos mercados ou regi\u00f5es\"\n\n---\n\n### FILTRO 5 \u2014 PRIORIDADE (\"O que tira o seu sono?\")\n\n> \"Esta \u00e9 a pergunta mais importante. Escolha at\u00e9 3 prioridades \u2014 o que mais te preocupa agora:\n>\n> 1\ufe0f\u20e3 Falta de clientes e vendas\n> 2\ufe0f\u20e3 Caixa no vermelho ou imprevis\u00edvel\n> 3\ufe0f\u20e3 N\u00e3o sei se meu produto tem mercado\n> 4\ufe0f\u20e3 Equipe fraca ou mal estruturada\n> 5\ufe0f\u20e3 Opera\u00e7\u00e3o ca\u00f3tica e sem processos\n> 6\ufe0f\u20e3 Concorr\u00eancia me comendo\n> 7\ufe0f\u20e3 Custo alto demais\n> 8\ufe0f\u20e3 N\u00e3o sei o ROI do meu neg\u00f3cio\n> 9\ufe0f\u20e3 Preciso de capital para crescer\n> \ud83d\udd1f Quero preparar para captar investimento\n> 1\ufe0f\u20e31\ufe0f\u20e3 N\u00e3o tenho um plano claro de onde quero chegar\n> 1\ufe0f\u20e32\ufe0f\u20e3 Preciso automatizar para reduzir custo operacional\"\n\n---\n\n### CONFIRMA\u00c7\u00c3O DOS FILTROS\n\nAntes de gerar o plano, confirme:\n\n> \"Perfeito. Deixa eu confirmar:\n>\n> Voc\u00ea tem uma empresa do tipo **[tipo]**, na fase **[fase]**, com **[tamanho]** pessoas.\n> Seu momento atual \u00e9 **[momento]** e suas prioridades s\u00e3o **[prioridades]**.\n>\n> \u2705 Confere \u2014 pode gerar meu plano\n> \u270f\ufe0f Quero ajustar algo\"\n\n---\n\n## ARQUITETURA DO PRODUTO \u2014 M\u00d3DULOS\n\n### M\u00d3DULO 1 \u2014 DIAGN\u00d3STICO E ESTRAT\u00c9GIA (Business Performance)\n\n**Entregue nesta sequ\u00eancia:**\n\n**1.1 \u2014 Scorecard (ap\u00f3s diagn\u00f3stico)**\n```\nSCORECARD \u2014 [Empresa] \u2014 [Data]\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nFinanceiro      X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nVendas          X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nMarketing       X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nOpera\u00e7\u00e3o        X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nPessoas         X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nEstrat\u00e9gia      X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nNOTA GERAL      X/10\n```\n\n**1.2 \u2014 Benchmark do Setor**\nCompare com m\u00e9dias reais:\n- Margem l\u00edquida m\u00e9dia do setor\n- CAC t\u00edpico do segmento\n- Giro de estoque padr\u00e3o\n- Gap em R$/m\u00eas deixado na mesa\n\n**1.3 \u2014 Mapa de Falhas \u2192 Oportunidades**\n| Falha | Impacto | Urg\u00eancia | Oportunidade | ROI Estimado |\nPara cada falha, entregue a oportunidade acion\u00e1vel com ROI estimado.\n\n**1.4 \u2014 6 Cen\u00e1rios de ROI**\n| Cen\u00e1rio | Investimento | ROI Est. | Prazo |\n| Ultra-Conservador | M\u00ednimo | 30\u201380% | 24\u201336m |\n| Conservador | Baixo | 80\u2013150% | 18\u201324m |\n| Moderado | Equilibrado | 150\u2013300% | 12\u201318m |\n| Moderado-Arrojado | Acima m\u00e9dia | 300\u2013500% | 8\u201312m |\n| Arrojado | Alto | 500\u2013900% | 6\u201310m |\n| Ultra-Arrojado | M\u00e1ximo | 900%+ | 3\u20136m |\n\nMostre SEMPRE a matem\u00e1tica completa:\nROI (%) = (Ganho esperado \u2212 Investimento) \u00f7 Investimento \u00d7 100\n\n**1.5 \u2014 Plano de Neg\u00f3cios Completo (ap\u00f3s escolha do cen\u00e1rio)**\n- Sum\u00e1rio executivo\n- Canvas Business Model\n- An\u00e1lise de mercado (TAM/SAM/SOM)\n- Plano de marketing com GEO\n- Processo de vendas detalhado\n- Plano financeiro (DRE + Fluxo de Caixa 12 meses)\n- Plano operacional (3Ps: Produto, Pessoas, Processos)\n- Roadmap visual \u2014 passos para o objetivo final\n- Primeiros 30 dias (semana a semana)\n\n**1.6 \u2014 Playbook de Execu\u00e7\u00e3o**\nPara cada a\u00e7\u00e3o: O que fazer \u2192 Por que fazer \u2192 Como fazer \u2192 Quem faz \u2192 Quando \u2192 Custo \u2192 Como medir.\n\n---\n\n### M\u00d3DULO 2 \u2014 START (Novo Neg\u00f3cio)\n\n**Para quem est\u00e1 abrindo do zero:**\n\n1. Briefing inteligente (perguntas m\u00ednimas necess\u00e1rias)\n2. Canvas Business Model preenchido com sugest\u00f5es\n3. Valida\u00e7\u00e3o antes de investir (The Mom Test, Sprint digital, PMF Score)\n4. Plano de neg\u00f3cios completo (metodologia adaptada ao tipo de neg\u00f3cio)\n5. An\u00e1lise de viabilidade financeira (Break-even, ROI por cen\u00e1rio)\n6. Playbook de execu\u00e7\u00e3o com op\u00e7\u00f5es de implementa\u00e7\u00e3o\n\n**Metodologias aplicadas por tipo:**\n- Startup: Lean Startup + Sprint + Empreendedorismo Disciplinado (Aulet)\n- Varejo/Servi\u00e7os: Business Model Canvas + Kotler\n- Agro: Plano de safra + financiamento rural + barter\n- Tech/SaaS: Unit Economics + AARRR + Traction\n\n---\n\n### M\u00d3DULO 3 \u2014 AI TRANSFORMATION\n\n**Tom especial:** cauteloso, t\u00e9cnico, cir\u00fargico. Sempre diga:\n> \"A transforma\u00e7\u00e3o com IA \u00e9 delicada. Vamos devagar \u2014 cada passo s\u00f3 avan\u00e7a quando o anterior est\u00e1 consolidado. Prioridade absoluta: preservar a opera\u00e7\u00e3o.\"\n\n**Entregue:**\n1. Score de Prontid\u00e3o para IA (0\u201310 por dimens\u00e3o)\n2. Mapa de oportunidades por setor (ROI estimado por processo)\n3. Projeto no papel ANTES de qualquer contrata\u00e7\u00e3o\n4. Roadmap de implementa\u00e7\u00e3o em fases paralelas \u00e0 opera\u00e7\u00e3o\n5. Sele\u00e7\u00e3o de ferramentas por setor e porte\n6. Gest\u00e3o de riscos (10 riscos mais comuns + como mitigar)\n7. Advocate Plan \u2014 como convencer decisores internos\n8. Programa de Pessoas \u2014 realoca\u00e7\u00e3o e recoloca\u00e7\u00e3o respons\u00e1vel\n\n---\n\n### M\u00d3DULO 4 \u2014 CR\u00c9DITO FINANCEIRO\n\n**Entregue:**\n1. Diagn\u00f3stico financeiro (capacidade, garantias, perfil de cr\u00e9dito)\n2. Simula\u00e7\u00e3o comparativa (capital pr\u00f3prio vs cr\u00e9dito vs misto)\n3. Op\u00e7\u00f5es por perfil (MEI, ME, EPP, M\u00e9dia empresa)\n4. Como montar dossi\u00ea para banco usando relat\u00f3rio do ROI.ai\n5. Parceiros recomendados por regi\u00e3o:\n   - Brasil: Biz Capital, Nexoos, BNDES, Creditas Empresas\n   - EUA: SBA Loans, Kabbage, BlueVine\n   - Europa: BPI France, KfW, IFC\n\n---\n\n### M\u00d3DULO 5 \u2014 CEO SUITE (18 Agentes)\n\n**Quando ativado, apresente o Conselho Executivo completo:**\n\n**CORE:** Orquestrador Master | Agente de Mem\u00f3ria | Agente de ROI e Estrat\u00e9gia\n\n**RECEITA:** Sales Agent | Marketing Agent (com GEO) | Customer Agent\n\n**OPERA\u00c7\u00c3O:** Operations Agent | IT Agent | Supply Agent | Quality Agent | Logistics Agent | Comex Agent\n\n**PESSOAS:** HR Agent | Admin Agent\n\n**CONTROLE:** Finance Agent | Accounting Agent | Legal Agent | Compliance Agent\n\n**Calibra\u00e7\u00e3o autom\u00e1tica por setor e porte:**\n- MEI/Micro: linguagem simples, foco em sobreviv\u00eancia, sem jarg\u00e3o\n- Pequena: equil\u00edbrio t\u00e9cnico/acess\u00edvel\n- M\u00e9dia/Grande: linguagem executiva completa\n\n---\n\n## REGRAS INEGOCI\u00c1VEIS\n\n1. **NUNCA** entregue dados financeiros inventados \u2014 use benchmark expl\u00edcito\n2. **NUNCA** recomende a\u00e7\u00e3o sem ROI estimado e prazo\n3. **NUNCA** entregue bloco sem CTA \u2014 sempre provoque o pr\u00f3ximo passo\n4. **SEMPRE** mostre a matem\u00e1tica completa do ROI\n5. **SEMPRE** adapte ao porte: MEI fala diferente de grande empresa\n6. **SEMPRE** pe\u00e7a aprova\u00e7\u00e3o antes de avan\u00e7ar de etapa\n7. Apresenta\u00e7\u00e3o visual: tabelas, listas curtas, blocos \u2014 nunca par\u00e1grafos longos\n8. Legal e Accounting sempre recomendam profissional para decis\u00f5es cr\u00edticas\n\n---\n\n## BENCHMARKS POR SETOR (use sempre)\n\n| Setor | Margem l\u00edquida | CAC t\u00edpico | Giro estoque |\n|-------|---------------|------------|-------------|\n| Ind\u00fastria | 6\u201312% | M\u00e9dio-alto | 60\u201390 dias |\n| Varejo | 3\u20138% | Baixo | 30\u201345 dias |\n| Servi\u00e7os | 15\u201330% | M\u00e9dio | N/A |\n| Agroneg\u00f3cio | 10\u201320% | Baixo | Por safra |\n| Tech/SaaS | 20\u201340% | Alto | N/A |\n| Sa\u00fade | 10\u201320% | M\u00e9dio | 30\u201360 dias |\n| Constru\u00e7\u00e3o | 8\u201315% | Alto | Por obra |\n| Alimenta\u00e7\u00e3o | 8\u201318% | Baixo-m\u00e9dio | 7\u201315 dias |\n\n---\n\n## FERRAMENTAS POR SETOR\n\n| Setor | ERP/Gest\u00e3o | CRM | Financeiro |\n|-------|-----------|-----|------------|\n| Micro/MEI | Conta Azul, Nibo | \u2014 | Nubank PJ, Inter PJ |\n| Varejo | Bling, Tiny, Linx | RD Station | Stone, Cielo |\n| Ind\u00fastria | TOTVS, Protheus | Salesforce | Sicoob, BTG |\n| Agro | Aegro, Granatum | \u2014 | BB Agro, Rabobank |\n| Sa\u00fade | iClinic, Clinic | \u2014 | Tasy, MV |\n| Constru\u00e7\u00e3o | Sienge, Unibase | \u2014 | Caixa, BNDES |\n| Tech/SaaS | Omie, Sankhya | HubSpot, Pipedrive | Stripe, Paddle |\n\n---\n\n## ERROS COMUNS QUE O ROI.AI PREVINE\n\nBaseado em CB Insights (110+ post-mortems de startups):\n1. Falta de mercado (42%) \u2192 ICP, JTBD, The Mom Test, PMF Score\n2. Caixa zerado (29%) \u2192 Burn Rate, Runway, acesso a cr\u00e9dito\n3. Equipe errada (23%) \u2192 Org Design, RACI, Founder Alignment\n4. Ignorar concorr\u00eancia (19%) \u2192 Porter 5 Forces, Blue Ocean\n5. Precifica\u00e7\u00e3o incorreta (18%) \u2192 Unit Economics, Activity-Based Costing\n...e mais 15 erros mapeados com solu\u00e7\u00e3o estruturada.\n\n---\n\n## ENCERRAMENTO PADR\u00c3O\n\nAp\u00f3s qualquer entrega:\n> \"Esse \u00e9 o seu mapa. A pr\u00f3xima decis\u00e3o \u00e9 sua.\n>\n> Posso:\n> 1\ufe0f\u20e3 Aprofundar qualquer parte do plano\n> 2\ufe0f\u20e3 Ativar um agente espec\u00edfico do CEO Suite\n> 3\ufe0f\u20e3 Simular outro cen\u00e1rio financeiro\n> 4\ufe0f\u20e3 Ajudar a preparar para capta\u00e7\u00e3o de investimento\n> 5\ufe0f\u20e3 Gerar o relat\u00f3rio completo em PDF\n> \ud83d\udcac Tenho outra necessidade \u2014 me fala\"\n\n---\n\n**FIM DO PROMPT MESTRE \u2014 ROI.ai v4.0**\n*Business Operating System | Bruno Ract | Maio 2026*\n*Proxy: old-breeze-3057.brunoract.workers.dev*\n"</script>
+<style>
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#181818;--neon:#39ff14;--nb:rgba(57,255,20,0.28);--ng:rgba(57,255,20,0.08);--s:#c8c8c8;--d:rgba(200,200,200,0.55);--b:rgba(255,255,255,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--s);font-family:"Inter",sans-serif;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 48px;border-bottom:1px solid var(--b);background:rgba(10,10,10,0.97);position:sticky;top:0;z-index:100;}
+.logo{font-family:"Orbitron",sans-serif;font-size:18px;font-weight:900;letter-spacing:2px;display:flex;align-items:center;gap:8px;}
+.ld{width:6px;height:6px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.lr{background:linear-gradient(90deg,#fff,#c0c0c0,#e8e8e8,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.la{color:var(--neon);-webkit-text-fill-color:var(--neon);text-shadow:0 0 8px var(--neon);}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nl{font-size:12px;color:var(--d);text-decoration:none;cursor:pointer;transition:color 0.2s;}
+.nl:hover{color:var(--s);}
+.nc{font-family:"Orbitron",sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--neon);border:1px solid var(--nb);padding:8px 18px;border-radius:6px;cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.nc:hover{background:rgba(57,255,20,0.07);}
+section{padding:80px 48px;border-bottom:1px solid var(--b);}
+.alt{background:var(--bg2);}
+.tag{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--neon);display:block;margin-bottom:12px;}
+.h1{font-family:"Orbitron",sans-serif;font-size:clamp(48px,9vw,88px);font-weight:900;letter-spacing:3px;line-height:1;margin-bottom:6px;}
+.slogan{font-family:"Orbitron",sans-serif;font-size:11px;font-weight:600;letter-spacing:6px;color:var(--neon);text-shadow:0 0 8px var(--neon);margin-bottom:24px;display:block;}
+.tagline{font-family:"Orbitron",sans-serif;font-size:clamp(18px,3vw,28px);font-weight:700;color:#fff;max-width:700px;margin:0 auto 16px;line-height:1.3;}
+.desc{font-size:14px;color:var(--d);line-height:1.75;max-width:640px;margin:0 auto;}
+.cta{display:inline-block;margin-top:24px;padding:15px 44px;border:1px solid var(--nb);color:var(--neon);font-family:"Orbitron",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:6px;cursor:pointer;text-decoration:none;transition:all 0.3s;box-shadow:0 0 16px rgba(57,255,20,0.1);}
+.cta:hover{background:rgba(57,255,20,0.07);box-shadow:0 0 32px rgba(57,255,20,0.2);}
+.stats-bar{display:grid;grid-template-columns:repeat(7,1fr);background:var(--bg2);border:1px solid var(--b);border-radius:12px;padding:20px 24px;max-width:960px;margin:44px auto 0;align-items:center;}
+.sitem{text-align:center;padding:0 8px;}
+.snum{font-family:"Orbitron",sans-serif;font-size:22px;font-weight:900;color:var(--neon);display:block;line-height:1.2;margin-bottom:4px;}
+.slbl{font-size:9px;color:rgba(200,200,200,0.4);letter-spacing:1.5px;text-transform:uppercase;display:block;}
+.sdiv{width:1px;background:var(--b);align-self:stretch;}
+.h2{font-size:clamp(20px,3.5vw,30px);font-weight:500;color:#fff;margin-bottom:10px;}
+.sub{font-size:14px;color:var(--d);line-height:1.75;max-width:680px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px;}
+.card{background:var(--bg3);border:1px solid var(--b);border-radius:12px;padding:24px 20px;}
+.carda{border-left:2px solid var(--neon);border-radius:0 12px 12px 0;}
+.ct{font-size:14px;font-weight:500;color:#fff;margin-bottom:8px;}
+.cs{font-size:13px;color:var(--d);line-height:1.65;}
+.pillar{background:var(--bg3);border:1px solid var(--b);border-top:2px solid var(--neon);border-radius:12px;padding:24px 20px;transition:border-color 0.2s;}
+.pillar:hover{border-color:var(--nb);}
+.pi{font-size:24px;color:var(--neon);margin-bottom:12px;display:block;}
+.cn{font-family:"Orbitron",sans-serif;font-size:22px;font-weight:900;color:var(--neon);margin-bottom:2px;}
+.ct2{font-size:10px;color:rgba(200,200,200,0.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:block;}
+.cq{font-size:13px;color:var(--d);line-height:1.7;font-style:italic;margin-bottom:16px;}
+.av{display:flex;align-items:center;gap:10px;}
+.avc{width:36px;height:36px;border-radius:8px;background:var(--bg2);border:1px solid var(--nb);display:flex;align-items:center;justify-content:center;font-family:"Orbitron",sans-serif;font-size:10px;font-weight:700;color:var(--neon);flex-shrink:0;}
+.avn{font-size:13px;font-weight:500;color:var(--s);}
+.avr{font-size:11px;color:var(--d);margin-top:2px;}
+.pc{background:var(--bg2);border:1px solid var(--b);border-radius:12px;padding:28px 24px;}
+.pcft{border-color:var(--nb);}
+.pp{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--d);display:block;margin-bottom:14px;}
+.pv{font-family:"Orbitron",sans-serif;font-size:44px;font-weight:900;line-height:1;color:#fff;}
+.pvg{color:var(--neon);}
+.pm{font-size:12px;color:var(--d);margin-bottom:20px;display:block;}
+.pf{list-style:none;margin-bottom:24px;}
+.pf li{font-size:12px;color:var(--d);padding:7px 0;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;}
+.pf li:last-child{border-bottom:none;}
+.on{color:var(--neon);font-size:13px;}
+.off{color:rgba(200,200,200,0.2);font-size:13px;}
+.pb{display:block;text-align:center;width:100%;padding:12px;border-radius:8px;font-family:"Orbitron",sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:none;}
+.pbfr{background:transparent;border:1px solid var(--b);color:var(--d);}
+.pbpr{background:transparent;border:1px solid var(--nb);color:var(--neon);}
+.pbfr:hover{border-color:rgba(200,200,200,0.2);color:var(--s);}
+.pbpr:hover{background:rgba(57,255,20,0.07);}
+.badge{display:inline-block;background:var(--neon);color:#0a0a0a;font-family:"Orbitron",sans-serif;font-size:8px;font-weight:900;letter-spacing:2px;padding:3px 10px;border-radius:20px;margin-bottom:14px;}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:28px;}
+.cc{background:var(--bg3);border:1px solid var(--b);border-radius:12px;padding:24px 20px;text-align:center;}
+.cchl{border-color:var(--nb);}
+.cl{font-size:10px;color:var(--d);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:block;}
+.cp{font-size:18px;font-weight:500;color:rgba(200,200,200,0.35);display:block;text-decoration:line-through;margin-bottom:4px;}
+.cpg{color:var(--neon);text-decoration:none;font-size:24px;}
+.cs2{font-size:11px;color:var(--neon);font-weight:500;display:block;margin-top:4px;}
+.diag{background:#0d0d0d;border:1px solid var(--b);border-radius:12px;padding:28px;margin-top:28px;}
+.dlbl{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(200,200,200,0.2);text-align:center;margin-bottom:20px;display:block;}
+footer{padding:36px 48px;border-top:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.fl{font-size:12px;color:rgba(200,200,200,0.3);text-decoration:none;transition:color 0.2s;}
+.fl:hover{color:var(--s);}
+.fc{font-size:11px;color:rgba(200,200,200,0.2);}
+@media(max-width:768px){nav{padding:12px 20px;}.nav-links span,.nav-links a:not(.nc){display:none;}section{padding:56px 20px;}.stats-bar{grid-template-columns:repeat(4,1fr);}.sdiv{display:none;}.grid2,.grid3,.grid4,.comp-grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
 
-<div class="glow-top"></div>
-
 <nav>
-  <div class="nav-logo">
-    <span class="nav-logo-dot" style="width:6px;height:6px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:pulse 2s infinite;"></span>
-    <span class="nav-logo-roi">ROI</span><span class="nav-logo-ai">.ai</span>
-  </div>
+  <div class="logo"><span class="ld"></span><span class="lr">ROI</span><span class="la">.ai</span></div>
   <div class="nav-links">
-    <a href="#problemas" class="nav-link">
-      <i class="ti ti-alert-triangle"></i>
-      <span>Problemas</span>
-    </a>
-
-    <a href="#cases" class="nav-link">
-      <i class="ti ti-trophy"></i>
-      <span>Cases</span>
-    </a>
-    <a href="#planos" class="nav-link">
-      <i class="ti ti-credit-card"></i>
-      <span>Planos</span>
-    </a>
-    <a href="app.html" class="nav-cta">Começar grátis →</a>
+    <a class="nl" href="#problema">Solucao</a>
+    <a class="nl" href="#como-funciona">Como funciona</a>
+    <a class="nl" href="#cases">Cases</a>
+    <a class="nl" href="#planos">Planos</a>
+    <a class="nc" href="app.html">Minha empresa em alta performance &rarr;</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-logo"><span class="hero-logo-roi">ROI</span><span class="hero-logo-ai">.ai</span></div>
-  <span class="hero-slogan">Business Performance</span>
-  <p class="hero-desc">Seu negócio no próximo nível. Com estratégia, dados e ROI calculado.</p>
-  <div class="hero-btns">
-    <a href="app.html" class="btn-primary">Acessar a plataforma →</a>
-    <a href="#problemas" class="btn-secondary">Ver como funciona</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num green">15</span><span class="stat-label">minutos</span></div>
-    <div class="stat"><span class="stat-num">4</span><span class="stat-label">módulos</span></div>
-    <div class="stat"><span class="stat-num green">100%</span><span class="stat-label">com IA</span></div>
-    <div class="stat"><span class="stat-num">R$3</span><span class="stat-label">por dia</span></div>
+<section style="text-align:center;padding-top:96px;padding-bottom:80px;">
+  <div class="h1"><span class="lr">ROI</span><span class="la">.ai</span></div>
+  <span class="slogan">Business Performance</span>
+  <div class="tagline">Inteligencia C-Level com Maestria.</div>
+  <p class="desc">O ROI.ai vai alem do que qualquer consultoria tradicional entrega. Reunimos as metodologias, frameworks e estrategias mais avancadas do mercado global &mdash; automatizados por inteligencia artificial, calibrados para o seu negocio, entregues em minutos. Mais inteligente. Mais rapido. Mais completo. E voce economiza centenas de milhares por ano.</p>
+  <a class="cta" href="app.html">Minha empresa em alta performance &rarr;</a>
+  <div class="stats-bar">
+    <div class="sitem"><div class="snum">6</div><div class="slbl">Cenarios com ROI</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">80+</div><div class="slbl">Frameworks globais</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">3</div><div class="slbl">Rotas por objetivo</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">18</div><div class="slbl">Agentes C-Suite</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">1</div><div class="slbl">ERP via IA</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">12</div><div class="slbl">Trilhas Academy</div></div><div class="sdiv"></div><div class="sitem"><div class="snum">1</div><div class="slbl">Digital Twin</div></div>
   </div>
 </section>
 
-<!-- PROBLEMA -->
-<section id="problemas" class="section-alt">
-  <div class="container">
-    <span class="section-tag">O problema</span>
-    <h2 class="section-h2">Você reconhece alguma dessas situações?</h2>
-    <p class="section-sub">As dores reais de quem toca uma empresa hoje.</p>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon"><i class="ti ti-trending-down"></i></div>
-        <div><h3>Fatura bem, sobra pouco</h3><p>O faturamento cresce mas o lucro não aparece. Você não sabe onde está o ralo.</p></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="ti ti-map-off"></i></div>
-        <div><h3>Sem plano, no improviso</h3><p>Decisões no feeling, sem dados, sem metas claras e sem rota definida.</p></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="ti ti-users-minus"></i></div>
-        <div><h3>Vendas sem processo</h3><p>Cada vendedor faz do seu jeito. Conversão baixa e ciclo de venda longo demais.</p></div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon"><i class="ti ti-robot-off"></i></div>
-        <div><h3>Concorrente usando IA</h3><p>Você ainda opera no manual enquanto a concorrência automatiza e reduz custos.</p></div>
-      </div>
-    </div>
+<section class="alt" id="problema">
+  <span class="tag">O problema</span>
+  <h2 class="h2">Seu concorrente ja esta usando IA. E voce?</h2>
+  <p class="sub">72% das empresas que nao se adaptam a nova era digital perdem competitividade irreversivelmente nos proximos 3 anos. <em style="color:rgba(200,200,200,0.3)">(Gartner, 2024)</em><br><br>Enquanto voce le isso, novos concorrentes entram no seu mercado com custos menores, processos mais rapidos e IA tomando decisoes que antes exigiam equipes inteiras. A era da gestao no feeling acabou. Quem nao se adaptar agora, nao tera uma segunda chance.</p>
+  <div class="grid2">
+    <div class="card carda"><div class="ct">Nao basta usar IA</div><div class="cs">A maioria dos empresarios ja usa &mdash; e continua perdida. Usam dezenas de ferramentas sem plano, sem orientacao, sem estrategia. E como ter um Ferrari sem saber dirigir.</div></div>
+    <div class="card carda"><div class="ct">A verdadeira vantagem</div><div class="cs">Nao e usar IA. E saber orquestra-la. O ROI.ai te transforma no maestro da sua empresa &mdash; estrategia, ROI calculado, agentes autonomos e treinamento C-Level. Tudo junto.</div></div>
+  </div>
+  <p style="font-size:14px;color:var(--neon);font-weight:500;margin-top:24px;">Seja o primeiro. Seja o melhor. Seja o ROI.ai.</p>
+</section>
+
+<section id="como-funciona">
+  <span class="tag">Como funciona</span>
+  <h2 class="h2">Voce no comando. Agentes executando. ERP operando.</h2>
+  <p class="sub">Uma hierarquia de inteligencia artificial trabalhando exclusivamente pela sua empresa &mdash; 24 horas por dia, sem descanso.</p>
+  <div class="diag">
+    <span class="dlbl">Hierarquia de orquestracao ROI.ai</span>
+    <svg width="100%" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/></marker><marker id="b1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+<rect x="200" y="16" width="200" height="56" rx="10" fill="#085041" stroke="#1D9E75" stroke-width="1"/>
+<text font-family="sans-serif" font-size="14" font-weight="600" fill="#9FE1CB" x="300" y="38" text-anchor="middle" dominant-baseline="central">Voce</text>
+<text font-family="sans-serif" font-size="11" fill="#5DCAA5" x="300" y="58" text-anchor="middle" dominant-baseline="central">Orquestrador · C-Level · Maestro</text>
+<line x1="260" y1="72" x2="180" y2="132" stroke="#1D9E75" stroke-width="1" marker-end="url(#a1)"/>
+<line x1="290" y1="72" x2="280" y2="132" stroke="#1D9E75" stroke-width="1" marker-end="url(#a1)"/>
+<line x1="320" y1="72" x2="330" y2="132" stroke="#1D9E75" stroke-width="1" marker-end="url(#a1)"/>
+<line x1="350" y1="72" x2="430" y2="132" stroke="#1D9E75" stroke-width="1" marker-end="url(#a1)"/>
+<rect x="60" y="132" width="480" height="104" rx="8" fill="none" stroke="rgba(83,74,183,0.25)" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text font-family="sans-serif" font-size="10" fill="rgba(175,169,236,0.5)" x="76" y="128" dominant-baseline="central">Agentes Autonomos — IA Agentica</text>
+<rect x="72" y="146" width="100" height="40" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="122" y="162" text-anchor="middle" dominant-baseline="central">Finance</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="122" y="178" text-anchor="middle" dominant-baseline="central">CFO · Controller</text>
+<rect x="184" y="146" width="100" height="40" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="234" y="162" text-anchor="middle" dominant-baseline="central">Sales &amp; Mkt</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="234" y="178" text-anchor="middle" dominant-baseline="central">CMO · CRO</text>
+<rect x="296" y="146" width="100" height="40" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="346" y="162" text-anchor="middle" dominant-baseline="central">Operations</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="346" y="178" text-anchor="middle" dominant-baseline="central">COO · Supply</text>
+<rect x="408" y="146" width="120" height="40" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="468" y="162" text-anchor="middle" dominant-baseline="central">People &amp; Legal</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="468" y="178" text-anchor="middle" dominant-baseline="central">CHRO · CLO</text>
+<rect x="128" y="198" width="100" height="30" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="10" font-weight="600" fill="#CECBF6" x="178" y="213" text-anchor="middle" dominant-baseline="central">Technology · CTO</text>
+<rect x="240" y="198" width="100" height="30" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="10" font-weight="600" fill="#CECBF6" x="290" y="213" text-anchor="middle" dominant-baseline="central">Strategy · ROI</text>
+<rect x="352" y="198" width="100" height="30" rx="6" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="10" font-weight="600" fill="#CECBF6" x="402" y="213" text-anchor="middle" dominant-baseline="central">Compliance · CCO</text>
+<line x1="180" y1="236" x2="240" y2="280" stroke="#534AB7" stroke-width="1" marker-end="url(#b1)"/>
+<line x1="290" y1="236" x2="290" y2="280" stroke="#534AB7" stroke-width="1" marker-end="url(#b1)"/>
+<line x1="402" y1="236" x2="360" y2="280" stroke="#534AB7" stroke-width="1" marker-end="url(#b1)"/>
+<rect x="140" y="280" width="320" height="52" rx="10" fill="#633806" stroke="#EF9F27" stroke-width="1"/>
+<text font-family="sans-serif" font-size="13" font-weight="600" fill="#FAC775" x="300" y="298" text-anchor="middle" dominant-baseline="central">ERP Integrado</text>
+<text font-family="sans-serif" font-size="11" fill="#EF9F27" x="300" y="318" text-anchor="middle" dominant-baseline="central">Execucao autonoma · Financeiro · Estoque · Vendas · RH</text>
+<text font-family="sans-serif" font-size="10" fill="rgba(200,200,200,0.2)" x="300" y="348" text-anchor="middle" dominant-baseline="central">Operacao executando · Resultado financeiro gerado</text>
+</svg>
   </div>
 </section>
 
-<!-- ANTES E DEPOIS -->
-<section>
-  <div class="container">
-    <span class="section-tag">Antes e depois</span>
-    <h2 class="section-h2">O que muda com o ROI.ai</h2>
-    <p class="section-sub" style="margin-bottom:40px">Um case resumido — a diferença na prática.</p>
-    <div class="ba-grid">
-      <div class="ba-card ba-before">
-        <span class="ba-label">Antes</span>
-        <div class="ba-item"><i class="ti ti-x" style="color:#ff6b6b"></i>Sem clareza sobre onde perde dinheiro</div>
-        <div class="ba-item"><i class="ti ti-x" style="color:#ff6b6b"></i>Margem líquida de 4% — metade da média do setor</div>
-        <div class="ba-item"><i class="ti ti-x" style="color:#ff6b6b"></i>Processo de vendas no improviso</div>
-        <div class="ba-item"><i class="ti ti-x" style="color:#ff6b6b"></i>Decisões no feeling, sem dados</div>
-        <div class="ba-item"><i class="ti ti-x" style="color:#ff6b6b"></i>Crescimento estagnado há 2 anos</div>
-      </div>
-      <div class="ba-card ba-after">
-        <span class="ba-label">Com ROI.ai — 90 dias</span>
-        <div class="ba-item"><i class="ti ti-check" style="color:var(--neon)"></i>Diagnóstico completo em 15 minutos</div>
-        <div class="ba-item"><i class="ti ti-check" style="color:var(--neon)"></i>Margem líquida de 11% — acima da média</div>
-        <div class="ba-item"><i class="ti ti-check" style="color:var(--neon)"></i>Processo de vendas documentado e treinado</div>
-        <div class="ba-item"><i class="ti ti-check" style="color:var(--neon)"></i>Plano com ROI calculado executado</div>
-        <div class="ba-item"><i class="ti ti-check" style="color:var(--neon)"></i>+38% de faturamento em 3 meses</div>
-      </div>
-    </div>
+<section class="alt">
+  <span class="tag">Ecossistema</span>
+  <h2 class="h2">Tudo interconectado. Tudo trabalhando por voce.</h2>
+  <p class="sub">80+ frameworks globais alimentando os agentes. Agentes comandando o ERP. ERP gerando resultado financeiro real. E tudo voltando para voce como inteligencia.</p>
+  <div class="diag">
+    <span class="dlbl">Fluxo completo de valor ROI.ai</span>
+    <svg width="100%" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/></marker>
+<marker id="b2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></marker>
+<marker id="c2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round"/></marker>
+<marker id="d2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round"/></marker>
+</defs>
+<rect x="200" y="14" width="200" height="48" rx="10" fill="#085041" stroke="#1D9E75" stroke-width="1"/>
+<text font-family="sans-serif" font-size="13" font-weight="600" fill="#9FE1CB" x="300" y="32" text-anchor="middle" dominant-baseline="central">Orquestrador</text>
+<text font-family="sans-serif" font-size="11" fill="#5DCAA5" x="300" y="50" text-anchor="middle" dominant-baseline="central">Voce · C-Level · Maestro</text>
+<line x1="300" y1="62" x2="300" y2="96" stroke="#1D9E75" stroke-width="1" marker-end="url(#a2)"/>
+<rect x="210" y="96" width="180" height="44" rx="8" fill="#085041" stroke="#1D9E75" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#9FE1CB" x="300" y="113" text-anchor="middle" dominant-baseline="central">Core Agent</text>
+<text font-family="sans-serif" font-size="10" fill="#5DCAA5" x="300" y="129" text-anchor="middle" dominant-baseline="central">Conselho Executivo · 360</text>
+<line x1="230" y1="118" x2="155" y2="166" stroke="#1D9E75" stroke-width="0.8" marker-end="url(#a2)"/>
+<line x1="270" y1="140" x2="240" y2="166" stroke="#1D9E75" stroke-width="0.8" marker-end="url(#a2)"/>
+<line x1="330" y1="140" x2="360" y2="166" stroke="#1D9E75" stroke-width="0.8" marker-end="url(#a2)"/>
+<line x1="370" y1="118" x2="455" y2="166" stroke="#1D9E75" stroke-width="0.8" marker-end="url(#a2)"/>
+<rect x="80" y="166" width="110" height="42" rx="8" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="135" y="183" text-anchor="middle" dominant-baseline="central">Finance</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="135" y="199" text-anchor="middle" dominant-baseline="central">CFO · Controller</text>
+<rect x="202" y="166" width="110" height="42" rx="8" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="257" y="183" text-anchor="middle" dominant-baseline="central">Sales &amp; Ops</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="257" y="199" text-anchor="middle" dominant-baseline="central">CRO · COO</text>
+<rect x="324" y="166" width="110" height="42" rx="8" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="379" y="183" text-anchor="middle" dominant-baseline="central">Marketing</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="379" y="199" text-anchor="middle" dominant-baseline="central">CMO · GEO</text>
+<rect x="446" y="166" width="110" height="42" rx="8" fill="#3C3489" stroke="#7F77DD" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="12" font-weight="600" fill="#CECBF6" x="501" y="183" text-anchor="middle" dominant-baseline="central">People &amp; Legal</text>
+<text font-family="sans-serif" font-size="10" fill="#AFA9EC" x="501" y="199" text-anchor="middle" dominant-baseline="central">CHRO · CLO</text>
+<rect x="14" y="96" width="54" height="236" rx="8" fill="none" stroke="rgba(200,200,200,0.07)" stroke-width="0.5" stroke-dasharray="3 2"/>
+<text font-family="sans-serif" font-size="8" fill="rgba(200,200,200,0.2)" x="41" y="92" text-anchor="middle">Base</text>
+<rect x="18" y="102" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="113" text-anchor="middle" dominant-baseline="central">80+ frameworks</text>
+<rect x="18" y="130" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="141" text-anchor="middle" dominant-baseline="central">Business Plan</text>
+<rect x="18" y="158" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="169" text-anchor="middle" dominant-baseline="central">ROI · Cenarios</text>
+<rect x="18" y="186" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="197" text-anchor="middle" dominant-baseline="central">Digital Twin</text>
+<rect x="18" y="214" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="225" text-anchor="middle" dominant-baseline="central">Startup · MVP</text>
+<rect x="18" y="242" width="46" height="22" rx="4" fill="#252523" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-family="sans-serif" font-size="8" fill="#B4B2A9" x="41" y="253" text-anchor="middle" dominant-baseline="central">Academy</text>
+<line x1="68" y1="183" x2="80" y2="183" stroke="rgba(200,200,200,0.08)" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="68" y1="197" x2="202" y2="197" stroke="rgba(200,200,200,0.08)" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="135" y1="208" x2="210" y2="278" stroke="#534AB7" stroke-width="0.8" marker-end="url(#b2)"/>
+<line x1="257" y1="208" x2="270" y2="278" stroke="#534AB7" stroke-width="0.8" marker-end="url(#b2)"/>
+<line x1="379" y1="208" x2="340" y2="278" stroke="#534AB7" stroke-width="0.8" marker-end="url(#b2)"/>
+<line x1="501" y1="208" x2="410" y2="278" stroke="#534AB7" stroke-width="0.8" marker-end="url(#b2)"/>
+<rect x="140" y="278" width="320" height="50" rx="10" fill="#633806" stroke="#EF9F27" stroke-width="1"/>
+<text font-family="sans-serif" font-size="13" font-weight="600" fill="#FAC775" x="300" y="296" text-anchor="middle" dominant-baseline="central">ERP Integrado</text>
+<text font-family="sans-serif" font-size="11" fill="#EF9F27" x="300" y="314" text-anchor="middle" dominant-baseline="central">Executa ordens · Financeiro · Estoque · Vendas · RH</text>
+<line x1="300" y1="328" x2="300" y2="360" stroke="#BA7517" stroke-width="1" marker-end="url(#c2)"/>
+<rect x="160" y="360" width="280" height="50" rx="10" fill="#173404" stroke="#639922" stroke-width="1"/>
+<text font-family="sans-serif" font-size="13" font-weight="600" fill="#C0DD97" x="300" y="378" text-anchor="middle" dominant-baseline="central">Resultado Financeiro</text>
+<text font-family="sans-serif" font-size="11" fill="#97C459" x="300" y="396" text-anchor="middle" dominant-baseline="central">Receita crescendo · Custos otimizados · ROI comprovado</text>
+<path d="M440 385 Q560 385 560 36 Q560 20 400 20" fill="none" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2" marker-end="url(#d2)"/>
+<text font-family="sans-serif" font-size="9" fill="rgba(99,153,34,0.4)" x="565" y="203" text-anchor="start" dominant-baseline="central">loop</text>
+<text font-family="sans-serif" font-size="10" fill="rgba(200,200,200,0.15)" x="300" y="438" text-anchor="middle" dominant-baseline="central">Operacao autonoma · 18 agentes · Voce no comando total</text>
+</svg>
   </div>
 </section>
 
-
-
-<!-- CASES -->
-<section id="cases">
-  <div class="container">
-    <span class="section-tag">Cases de sucesso</span>
-    <h2 class="section-h2">Resultados reais de empresários reais.</h2>
-    <p class="section-sub" style="margin-bottom:40px">Histórias de quem aplicou o plano e colheu os resultados.</p>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-result">+R$ 87 mil</div>
-        <span class="case-time">em 4 meses</span>
-        <p class="case-text">"Faturava R$ 280k/mês e não sabia por que sobrava tão pouco. O ROI.ai identificou 3 pontos críticos que eu nunca tinha visto. Implementei o plano e em 4 meses aumentei meu lucro em R$ 87 mil. O ROI.ai pagou por si mesmo no primeiro mês."</p>
-        <div class="case-author">
-          <div class="case-avatar">MR</div>
-          <div><div class="case-name">Marcos R.</div><div class="case-role">Distribuidora · 28 funcionários</div></div>
-        </div>
-      </div>
-      <div class="case-card">
-        <div class="case-result">+40% conversão</div>
-        <span class="case-time">em 60 dias</span>
-        <p class="case-text">"Minha equipe de vendas era boa mas cada um fazia do seu jeito. O ROI.ai gerou um processo completo com script, funil e follow-up. Em 2 meses a conversão subiu 40% — R$ 54 mil a mais por mês."</p>
-        <div class="case-author">
-          <div class="case-avatar">CA</div>
-          <div><div class="case-name">Carla A.</div><div class="case-role">Software B2B · 15 funcionários</div></div>
-        </div>
-      </div>
-      <div class="case-card">
-        <div class="case-result">R$ 1,2M aprovado</div>
-        <span class="case-time">crédito em 30 dias</span>
-        <p class="case-text">"O ROI.ai gerou meu plano de negócios com ROI calculado e fluxo de caixa projetado. Levei para o banco e aprovaram R$ 1,2M em 30 dias. Sem o ROI.ai não teria conseguido esse crédito."</p>
-        <div class="case-author">
-          <div class="case-avatar">PT</div>
-          <div><div class="case-name">Paulo T.</div><div class="case-role">Indústria · 45 funcionários</div></div>
-        </div>
-      </div>
-      <div class="case-card">
-        <div class="case-result">-35% custo operacional</div>
-        <span class="case-time">em 90 dias com IA</span>
-        <p class="case-text">"O módulo de IA do ROI.ai mapeou minha operação e identificou onde automatizar. Reduzi 35% do custo em 3 meses. Minha equipe foi realocada para funções estratégicas — a empresa ficou mais forte."</p>
-        <div class="case-author">
-          <div class="case-avatar">LF</div>
-          <div><div class="case-name">Luiz F.</div><div class="case-role">E-commerce · 22 funcionários</div></div>
-        </div>
-      </div>
-      <div class="case-card">
-        <div class="case-result">R$ 320k em 6 meses</div>
-        <span class="case-time">negócio do zero</span>
-        <p class="case-text">"Tinha a ideia mas não sabia por onde começar. O módulo START me entregou Canvas, plano de negócios e playbook de execução. Segui o passo a passo e em 6 meses já faturava R$ 320k."</p>
-        <div class="case-author">
-          <div class="case-avatar">AM</div>
-          <div><div class="case-name">Ana M.</div><div class="case-role">Startup SaaS · fundadora</div></div>
-        </div>
-      </div>
-    </div>
+<section id="solucao">
+  <span class="tag">A solucao</span>
+  <h2 class="h2">O sistema operacional da sua empresa.</h2>
+  <p class="sub">Tudo que voce precisa para dominar seu mercado &mdash; em um unico lugar.</p>
+  <div class="grid4">
+    <div class="pillar"><span class="pi"><i class="ti ti-chart-arrows"></i></span><div class="ct">Strategy &amp; ROI</div><div class="cs">6 cenarios com ROI calculado. 80+ frameworks globais aplicados ao seu negocio.</div></div>
+    <div class="pillar"><span class="pi"><i class="ti ti-robot"></i></span><div class="ct">My AI Company</div><div class="cs">Digital Twin da sua operacao. Simulacao autonoma completa antes de executar.</div></div>
+    <div class="pillar"><span class="pi"><i class="ti ti-users"></i></span><div class="ct">C-Suite Agents</div><div class="cs">18 agentes autonomos. CFO &middot; CMO &middot; COO &middot; CTO &middot; CLO. Sob o seu comando.</div></div>
+    <div class="pillar"><span class="pi"><i class="ti ti-school"></i></span><div class="ct">ROI Academy</div><div class="cs">12 trilhas para operar como C-Level. GEO Strategy incluida.</div></div>
   </div>
 </section>
 
-<!-- PLANOS -->
-<section id="planos" class="section-alt">
-  <div class="container">
-    <span class="section-tag">Planos</span>
-    <h2 class="section-h2">Uma consultoria de R$ 50k. Por R$ 97/mês.</h2>
-    <p class="section-sub">Compare e veja quanto você economiza.</p>
-
-    <div class="pricing-wrapper">
-      <div class="pricing-comparison">
-        <div class="comp-card">
-          <span class="comp-label">Consultoria simples</span>
-          <span class="comp-price strike">R$ 20.000</span>
-          <span class="comp-desc">Plano básico. Entregue uma vez. Sem suporte.</span>
-        </div>
-        <div class="comp-card">
-          <span class="comp-label">Consultoria completa</span>
-          <span class="comp-price strike">R$ 50.000</span>
-          <span class="comp-desc">Plano de negócios. Meses de espera. Sem IA.</span>
-        </div>
-        <div class="comp-card highlight">
-          <span class="comp-label">ROI.ai Pro — anual</span>
-          <span class="comp-price neon">R$ 1.164</span>
-          <span class="comp-save">Você economiza até R$ 48.836</span>
-          <span class="comp-desc">Tudo isso. Ilimitado. Com IA. 24/7.</span>
-        </div>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <span class="price-plan">Free</span>
-          <div class="price-val">R$0</div>
-          <span class="price-period">para sempre</span>
-          <p class="price-desc">Conheça o ROI.ai e veja o poder na prática.</p>
-          <ul class="price-feat">
-            <li><i class="ti ti-check feat-on"></i>Canvas Business Model</li>
-            <li><i class="ti ti-check feat-on"></i>Diagnóstico + Scorecard</li>
-            <li><i class="ti ti-check feat-on"></i>Prévia dos 3 cenários</li>
-            <li><i class="ti ti-lock feat-off"></i><span class="feat-locked">Plano de negócios completo</span></li>
-            <li><i class="ti ti-lock feat-off"></i><span class="feat-locked">ROI detalhado com matemática</span></li>
-            <li><i class="ti ti-lock feat-off"></i><span class="feat-locked">Módulos IA e Vendas</span></li>
-          </ul>
-          <a href="app.html" class="price-btn free">Começar grátis</a>
-        </div>
-
-        <div class="price-card featured">
-          <span class="price-badge">MAIS POPULAR</span>
-          <span class="price-plan" style="color:var(--neon)">Pro</span>
-          <div class="price-val neon">97</div>
-          <span class="price-period">R$/mês · ou R$ 1.047/ano com 10% off</span>
-          <span class="price-annual">✦ Parcelado em até 12x sem juros</span>
-          <p class="price-desc">Acesso completo a todos os módulos. Diagnósticos ilimitados.</p>
-          <ul class="price-feat">
-            <li><i class="ti ti-check feat-on"></i>Tudo do plano Free</li>
-            <li><i class="ti ti-check feat-on"></i>Plano de negócios completo</li>
-            <li><i class="ti ti-check feat-on"></i>ROI com matemática detalhada</li>
-            <li><i class="ti ti-check feat-on"></i>Fluxo de caixa 12 meses</li>
-            <li><i class="ti ti-check feat-on"></i>Módulo IA Transformation</li>
-            <li><i class="ti ti-check feat-on"></i>Módulo Treinamento de Vendas</li>
-          </ul>
-          <a href="mailto:roiai@roiai.com.br?subject=Solicitar%20Acesso%20ROI.ai" class="price-btn pro">Solicitar acesso →</a>
-        </div>
-      </div>
-      <p class="price-disclaimer">Plataforma em fase de acesso antecipado · Entre em contato para demonstração</p>
-    </div>
+<section class="alt" id="cases">
+  <span class="tag">Cases de sucesso</span>
+  <h2 class="h2">Empresarios que escolheram estar a frente.</h2>
+  <div class="grid3">
+    <div class="card"><div class="cn">+R$ 2,3M</div><span class="ct2">em 8 meses</span><p class="cq">"Minha empresa parou de reagir e passou a liderar o mercado."</p><div class="av"><div class="avc">RM</div><div><div class="avn">Ricardo M.</div><div class="avr">Industria &middot; 45 func.</div></div></div></div>
+    <div class="card"><div class="cn">Seed USD 2M</div><span class="ct2">captado em 4 meses</span><p class="cq">"Pela primeira vez vi minha empresa do ponto de vista de um CEO de verdade."</p><div class="av"><div class="avc">CT</div><div><div class="avn">Camila T.</div><div class="avr">Startup SaaS &middot; fundadora</div></div></div></div>
+    <div class="card"><div class="cn">-40% custos</div><span class="ct2">operacao autonoma</span><p class="cq">"Coloquei minha operacao no piloto automatico. Gerencio tudo de qualquer lugar."</p><div class="av"><div class="avc">AF</div><div><div class="avn">Ana F.</div><div class="avr">Varejo &middot; 3 lojas</div></div></div></div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-final">
-  <h2>Pronto para o próximo nível?</h2>
-  <p>Comece agora. Grátis. Sem cartão de crédito.</p>
-  <a href="app.html" class="btn-primary">Acessar a plataforma →</a>
+<section id="planos">
+  <span class="tag">Planos</span>
+  <h2 class="h2">Escolha seu nivel de comando.</h2>
+  <p class="sub">O que as grandes empresas tem. Agora e seu.</p>
+  <div class="comp-grid">
+    <div class="cc"><span class="cl">Consultoria tradicional</span><span class="cp">R$ 50.000+</span><div class="cs">Meses de espera. Entrega pontual. Sem IA.</div></div>
+    <div class="cc"><span class="cl">Ferramentas genericas</span><span class="cp">Varias assinaturas</span><div class="cs">Sem plano. Sem ROI. Sem integracao.</div></div>
+    <div class="cc cchl"><span class="badge">SUA ESCOLHA</span><span class="cl" style="color:var(--neon);">ROI.ai</span><span class="cp cpg">R$ 97/mes</span><span class="cs2">Voce economiza centenas de milhares/ano</span></div>
+  </div>
+  <div class="grid4" style="margin-top:28px;">
+    <div class="pc"><span class="pp">Free</span><div class="pv">R$0</div><span class="pm">para sempre</span><ul class="pf"><li><span class="on"><i class="ti ti-check"></i></span>Strategy &amp; ROI parcial</li><li><span class="on"><i class="ti ti-check"></i></span>Canvas Business</li><li><span class="off"><i class="ti ti-lock"></i></span><span style="opacity:0.4;text-decoration:line-through;">Agentes C-Suite</span></li></ul><button class="pb pbfr" onclick="window.location='app.html'">Comecar gratis</button></div>
+    <div class="pc pcft"><span class="badge">MAIS POPULAR</span><span class="pp" style="color:var(--neon);">Pro</span><div class="pv pvg">97</div><span class="pm">R$/mes &middot; 12x sem juros</span><ul class="pf"><li><span class="on"><i class="ti ti-check"></i></span>Strategy &amp; ROI completo</li><li><span class="on"><i class="ti ti-check"></i></span>6 cenarios + 3 rotas</li><li><span class="on"><i class="ti ti-check"></i></span>ROI Academy</li></ul><button class="pb pbpr" onclick="window.location='app.html'">Ativar Pro</button></div>
+    <div class="pc"><span class="pp">Business</span><div class="pv">297</div><span class="pm">R$/mes</span><ul class="pf"><li><span class="on"><i class="ti ti-check"></i></span>Tudo do Pro</li><li><span class="on"><i class="ti ti-check"></i></span>5 Agentes C-Suite</li><li><span class="on"><i class="ti ti-check"></i></span>Digital Twin basico</li></ul><button class="pb pbfr" onclick="window.location='app.html'">Ativar Business</button></div>
+    <div class="pc"><span class="pp">CEO Suite</span><div class="pv">997</div><span class="pm">R$/mes</span><ul class="pf"><li><span class="on"><i class="ti ti-check"></i></span>18 Agentes C-Suite</li><li><span class="on"><i class="ti ti-check"></i></span>ERP comandado por IA</li><li><span class="on"><i class="ti ti-check"></i></span>Digital Twin completo</li></ul><button class="pb pbfr" onclick="window.location='app.html'">Ativar CEO Suite</button></div>
+  </div>
 </section>
 
-<!-- FOOTER -->
+<section class="alt" style="text-align:center;">
+  <h2 class="h2" style="font-size:clamp(22px,4vw,36px);">A ferramenta que todo empresario de alto nivel sempre quis.</h2>
+  <p class="sub" style="margin:0 auto 28px;">Agora existe. E e sua.</p>
+  <a class="cta" href="app.html">Minha empresa em alta performance &rarr;</a>
+  <p style="font-size:11px;color:rgba(200,200,200,0.2);margin-top:20px;">Acesso antecipado disponivel &middot; Vagas limitadas</p>
+</section>
+
 <footer>
-  <div class="footer-logo">
-    <span class="nav-logo-dot" style="width:6px;height:6px;background:var(--neon);border-radius:50%;box-shadow:0 0 6px var(--neon);"></span>
-    <span class="f-roi">ROI</span><span class="f-ai">.ai</span>
+  <div class="logo"><span class="ld"></span><span class="lr">ROI</span><span class="la">.ai</span></div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;">
+    <a class="fl" href="termos.html">Termos de Uso</a>
+    <a class="fl" href="privacidade.html">Privacidade</a>
+    <a class="fl" href="reembolso.html">Reembolso</a>
+    <a class="fl" href="app.html">Acessar plataforma</a>
   </div>
-  <div class="footer-links">
-    <a href="#problemas">Problemas</a>
-    <a href="#entregas">Entregas</a>
-    <a href="#cases">Cases</a>
-    <a href="#planos">Planos</a>
-    <a href="app.html">Acessar app</a>
-  </div>
-  <div class="footer-links" style="margin-top:8px">
-    <a href="/termos.html">Termos de Uso</a>
-    <a href="/privacidade.html">Política de Privacidade</a>
-    <a href="/reembolso.html">Política de Reembolso</a>
-  </div>
-  <div class="footer-copy">© 2026 ROI.ai · Business Performance · Bruno Ract Rocha · CNPJ: 31.610.128/0001-09</div>
+  <span class="fc">&copy; 2026 ROI.ai &middot; Bruno Ract Rocha &middot; CNPJ: 31.610.128/0001-09</span>
 </footer>
 
+<script>
+(function(){
+  var SP = JSON.parse(document.getElementById('sp').textContent);
+  var msgs=[], loading=false, lang='pt', rec=null, listening=false;
+  var PROXY='https://old-breeze-3057.brunoract.workers.dev/';
+  var lc={pt:'pt-BR',en:'en-US',es:'es-ES',fr:'fr-FR',de:'de-DE'};
+
+  function md(t){
+    if(!t) return '';
+    t=t.replace(/```([\s\S]*?)```/g,function(m,c){return '<pre><code>'+c+'</code></pre>';});
+    t=t.replace(/`([^`\n]+)`/g,function(m,c){return '<code>'+c+'</code>';});
+    t=t.replace(/^### (.+)$/gm,function(m,c){return '<h3>'+c+'</h3>';});
+    t=t.replace(/^## (.+)$/gm,function(m,c){return '<h2>'+c+'</h2>';});
+    t=t.replace(/^# (.+)$/gm,function(m,c){return '<h1>'+c+'</h1>';});
+    t=t.replace(/\*\*([^*]+)\*\*/g,function(m,c){return '<strong>'+c+'</strong>';});
+    t=t.replace(/\*([^*\n]+)\*/g,function(m,c){return '<em>'+c+'</em>';});
+    t=t.replace(/^> (.+)$/gm,function(m,c){return '<blockquote>'+c+'</blockquote>';});
+    t=t.replace(/^---$/gm,'<hr>');
+    t=t.replace(/^[*\-] (.+)$/gm,function(m,c){return '<li>'+c+'</li>';});
+    t=t.replace(/((?:<li>.*<\/li>\n?)+)/g,function(m){return '<ul>'+m+'</ul>';});
+    t=t.replace(/^\|(.+)\|$/gm,function(m,c){var cs=c.split('|');return '<tr>'+cs.map(function(x){return '<td>'+x.trim()+'</td>';}).join('')+'</tr>';});
+    t=t.replace(/((?:<tr>.*<\/tr>\n?)+)/g,function(m){var rs=m.trim().split('\n');if(rs.length>1&&rs[1]&&rs[1].indexOf('---')!==-1){var h=rs[0].replace(/<td>/g,'<th>').replace(/<\/td>/g,'</th>');var b=rs.slice(2).join('\n');return '<table><thead>'+h+'</thead><tbody>'+b+'</tbody></table>';}return '<table>'+m+'</table>';});
+    t=t.replace(/\n\n/g,'</p><p>');
+    t=t.replace(/\n/g,'<br>');
+    return t;
+  }
+
+  function addMsg(role,content,stream){
+    var chat=document.getElementById('chat');
+    var div=document.createElement('div');
+    div.className='msg '+(role==='assistant'?'ai':'us');
+    var av=document.createElement('div');
+    av.className='av '+(role==='assistant'?'ai':'me');
+    av.textContent=role==='assistant'?'ROI':'EU';
+    var bub=document.createElement('div');
+    bub.className='bub';
+    if(stream){bub.id='sbub';bub.innerHTML='<span class="cur"></span>';}
+    else bub.innerHTML=md(content);
+    div.appendChild(av);div.appendChild(bub);
+    chat.appendChild(div);chat.scrollTop=chat.scrollHeight;
+    return bub;
+  }
+
+  function showTyping(){
+    var chat=document.getElementById('chat');
+    var div=document.createElement('div');div.className='msg ai';div.id='typ';
+    var av=document.createElement('div');av.className='av ai';av.textContent='ROI';
+    var bub=document.createElement('div');bub.className='bub typ';
+    bub.innerHTML='<span></span><span></span><span></span>';
+    div.appendChild(av);div.appendChild(bub);chat.appendChild(div);
+    chat.scrollTop=chat.scrollHeight;
+  }
+
+  function rmTyping(){var e=document.getElementById('typ');if(e)e.remove();}
+
+  function getSys(){
+    return SP+(lang!=='pt'?'\n\nIMPORTANT: Respond only in '+lc[lang]+'.':'');
+  }
+
+  async function doStream(){
+    try{
+      var r=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2048,stream:true,system:getSys(),messages:msgs})});
+      if(!r.ok) throw new Error(r.status);
+      var reader=r.body.getReader(),dec=new TextDecoder(),full='';
+      rmTyping();
+      var bub=addMsg('assistant','',true);
+      while(true){
+        var rr=await reader.read();if(rr.done)break;
+        var lines=dec.decode(rr.value).split('\n');
+        for(var i=0;i<lines.length;i++){
+          if(lines[i].indexOf('data: ')===0){
+            var d=lines[i].slice(6);if(d==='[DONE]')continue;
+            try{var p=JSON.parse(d);if(p.type==='content_block_delta'&&p.delta&&p.delta.text){full+=p.delta.text;bub.innerHTML=md(full)+'<span class="cur"></span>';document.getElementById('chat').scrollTop=99999;}}catch(e){}
+          }
+        }
+      }
+      bub.innerHTML=md(full);msgs.push({role:'assistant',content:full});
+    }catch(err){
+      rmTyping();
+      try{
+        var r2=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2048,system:getSys(),messages:msgs})});
+        var d2=await r2.json();
+        if(d2.content&&d2.content[0]&&d2.content[0].text){var rep=d2.content[0].text;msgs.push({role:'assistant',content:rep});addMsg('assistant',rep,false);}
+        else addMsg('assistant','Erro ao conectar. Tente novamente.',false);
+      }catch(e2){addMsg('assistant','Erro ao conectar.',false);}
+    }
+  }
+
+  window.startChat=async function(){
+    document.getElementById('welcome').style.display='none';
+    document.getElementById('chat').style.display='flex';
+    document.getElementById('inp').disabled=false;
+    document.getElementById('sbtn').disabled=true;
+    loading=true;
+    msgs.push({role:'user',content:'Ola'});
+    showTyping();
+    await doStream();
+    loading=false;document.getElementById('sbtn').disabled=false;
+    document.getElementById('inp').focus();
+  };
+
+  window.sendMsg=async function(){
+    var inp=document.getElementById('inp');
+    var text=inp.value.trim();
+    if(!text||loading)return;
+    loading=true;inp.value='';inp.style.height='auto';
+    document.getElementById('sbtn').disabled=true;
+    addMsg('user',text,false);msgs.push({role:'user',content:text});
+    showTyping();await doStream();
+    loading=false;document.getElementById('sbtn').disabled=false;inp.focus();
+  };
+
+  window.newChat=function(){
+    msgs=[];
+    document.getElementById('chat').innerHTML='';
+    document.getElementById('chat').style.display='none';
+    document.getElementById('welcome').style.display='flex';
+    document.getElementById('inp').disabled=true;
+    document.getElementById('sbtn').disabled=true;
+    document.getElementById('inp').value='';
+  };
+
+  window.toggleVoice=function(){
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){alert('Use o Chrome para voz.');return;}
+    if(listening){if(rec)rec.stop();listening=false;document.getElementById('vbtn').classList.remove('active');document.getElementById('vlbl').textContent='Falar';}
+    else{
+      rec=new SR();rec.lang=lc[lang]||'pt-BR';
+      rec.onresult=function(e){document.getElementById('inp').value=e.results[0][0].transcript;listening=false;document.getElementById('vbtn').classList.remove('active');document.getElementById('vlbl').textContent='Falar';if(!document.getElementById('inp').disabled)window.sendMsg();};
+      rec.onerror=rec.onend=function(){listening=false;document.getElementById('vbtn').classList.remove('active');document.getElementById('vlbl').textContent='Falar';};
+      rec.start();listening=true;document.getElementById('vbtn').classList.add('active');document.getElementById('vlbl').textContent='Ouvindo...';
+    }
+  };
+
+  window.setLang=function(l){lang=l;};
+
+  var inp=document.getElementById('inp');
+  if(inp){
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();window.sendMsg();}});
+    inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,130)+'px';});
+  }
+})();
+</script>
 </body>
 </html>
