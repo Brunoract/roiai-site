@@ -7,15 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
-:root {
-  --bg:#0a0a0a; --bg2:#111; --bg3:#181818;
-  --neon:#39ff14; --neon-border:rgba(57,255,20,0.28); --neon-glow:rgba(57,255,20,0.08);
-  --silver:#c8c8c8; --dim:rgba(200,200,200,0.55); --faint:rgba(200,200,200,0.05);
-  --border:rgba(255,255,255,0.07); --red:#ff4444;
-}
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#181818;--neon:#39ff14;--neon-border:rgba(57,255,20,0.28);--neon-glow:rgba(57,255,20,0.08);--silver:#c8c8c8;--dim:rgba(200,200,200,0.55);--faint:rgba(200,200,200,0.05);--border:rgba(255,255,255,0.07);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--silver);font-family:"Inter",sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
-
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.97);flex-shrink:0;}
 .logo{font-family:"Orbitron",sans-serif;font-size:18px;font-weight:900;letter-spacing:2px;display:flex;align-items:center;gap:8px;text-decoration:none;}
 .logo-dot{width:6px;height:6px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:pulse 2s infinite;}
@@ -23,21 +17,18 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .logo-roi{background:linear-gradient(90deg,#fff,#c0c0c0,#e8e8e8,#888);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .logo-ai{color:var(--neon);-webkit-text-fill-color:var(--neon);text-shadow:0 0 8px var(--neon);}
 .logo-slogan{font-size:10px;color:var(--dim);letter-spacing:3px;text-transform:uppercase;margin-left:4px;}
-
 .header-right{display:flex;align-items:center;gap:10px;}
 .lang-select{background:var(--bg2);border:1px solid var(--border);color:var(--dim);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;outline:none;}
-.lang-select:focus{border-color:var(--neon-border);}
 .voice-btn{background:transparent;border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:5px;transition:all 0.2s;}
 .voice-btn:hover,.voice-btn.active{border-color:var(--neon-border);color:var(--neon);}
-.voice-btn.active{animation:voicePulse 1s infinite;}
-@keyframes voicePulse{0%,100%{box-shadow:0 0 8px rgba(57,255,20,0.2)}50%{box-shadow:0 0 20px rgba(57,255,20,0.4)}}
-
+.voice-btn.active{animation:vpulse 1s infinite;}
+@keyframes vpulse{0%,100%{box-shadow:0 0 8px rgba(57,255,20,0.2)}50%{box-shadow:0 0 20px rgba(57,255,20,0.4)}}
+.new-chat-btn{background:transparent;border:1px solid var(--border);color:var(--dim);font-size:10px;padding:0 12px;height:32px;border-radius:6px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:5px;}
+.new-chat-btn:hover{border-color:rgba(200,200,200,0.2);color:var(--silver);}
 .main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
-
 #chat{flex:1;overflow-y:auto;padding:28px 24px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth;}
 #chat::-webkit-scrollbar{width:3px;}
 #chat::-webkit-scrollbar-thumb{background:var(--neon-border);}
-
 .message{display:flex;gap:10px;animation:slideUp 0.3s ease;max-width:880px;}
 @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .message.user{align-self:flex-end;flex-direction:row-reverse;max-width:640px;}
@@ -47,7 +38,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .bubble{padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.8;max-width:800px;}
 .message.ai .bubble{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--neon);border-radius:4px 10px 10px 10px;color:var(--silver);}
 .message.user .bubble{background:var(--bg3);border:1px solid rgba(200,200,200,0.08);border-radius:10px 4px 10px 10px;}
-
 .bubble h1,.bubble h2,.bubble h3{font-family:"Orbitron",sans-serif;font-weight:700;margin:14px 0 6px;}
 .bubble h1{font-size:15px;color:var(--silver);}
 .bubble h2{font-size:13px;color:var(--neon);}
@@ -55,7 +45,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .bubble strong{color:var(--neon);font-weight:500;}
 .bubble em{color:var(--dim);font-style:italic;}
 .bubble code{background:var(--bg3);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-size:11px;color:var(--neon);}
-.bubble pre{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--neon-border);padding:14px;border-radius:6px;overflow-x:auto;font-size:12px;margin:10px 0;font-family:monospace;}
+.bubble pre{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--neon-border);padding:14px;border-radius:6px;overflow-x:auto;font-size:12px;margin:10px 0;}
 .bubble blockquote{border-left:2px solid var(--neon);padding:8px 14px;margin:10px 0;background:var(--neon-glow);border-radius:0 6px 6px 0;color:var(--dim);font-style:italic;}
 .bubble table{border-collapse:collapse;width:100%;margin:12px 0;font-size:12px;}
 .bubble th{background:rgba(57,255,20,0.07);color:var(--neon);padding:8px 12px;text-align:left;border-bottom:1px solid var(--neon-border);font-size:10px;text-transform:uppercase;letter-spacing:1px;}
@@ -65,16 +55,13 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .bubble li{margin:4px 0;color:var(--dim);}
 .bubble hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .bubble p{margin-bottom:8px;}
-
 .cursor{display:inline-block;width:2px;height:14px;background:var(--neon);animation:blink 0.8s infinite;vertical-align:middle;margin-left:2px;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
 .typing{display:flex;gap:4px;align-items:center;padding:14px 16px;}
 .typing span{width:5px;height:5px;background:var(--neon);border-radius:50%;animation:bounce 1.2s infinite;}
 .typing span:nth-child(2){animation-delay:0.15s;}
 .typing span:nth-child(3){animation-delay:0.3s;}
 @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:0.3}30%{transform:translateY(-5px);opacity:1;}}
-
 #welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center;}
 .wlogo{font-family:"Orbitron",sans-serif;font-size:clamp(52px,10vw,88px);font-weight:900;letter-spacing:3px;line-height:1;margin-bottom:6px;}
 .wlogo-roi{background:linear-gradient(135deg,#fff 0%,#c0c0c0 40%,#e8e8e8 60%,#888 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -88,23 +75,19 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .wstat-label{font-size:9px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block;}
 .start-btn{background:transparent;border:1px solid var(--neon-border);color:var(--neon);font-family:"Orbitron",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 48px;border-radius:4px;cursor:pointer;transition:all 0.3s;box-shadow:0 0 16px rgba(57,255,20,0.12);text-shadow:0 0 6px var(--neon);}
 .start-btn:hover{background:rgba(57,255,20,0.07);box-shadow:0 0 36px rgba(57,255,20,0.28);transform:translateY(-2px);}
-
 footer{padding:12px 24px 14px;border-top:1px solid var(--border);background:rgba(10,10,10,0.97);flex-shrink:0;}
 .input-row{display:flex;gap:8px;align-items:flex-end;}
 textarea{flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--silver);font-family:"Inter",sans-serif;font-size:13px;padding:10px 14px;resize:none;outline:none;border-radius:8px;line-height:1.6;min-height:44px;max-height:130px;transition:border-color 0.2s;}
-textarea:focus{border-color:var(--neon-border);box-shadow:0 0 0 3px rgba(57,255,20,0.04);}
+textarea:focus{border-color:var(--neon-border);}
 textarea::placeholder{color:rgba(200,200,200,0.18);}
 textarea:disabled{opacity:0.35;}
 .send-btn{background:transparent;border:1px solid var(--neon-border);color:var(--neon);font-family:"Orbitron",sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:0 18px;height:44px;border-radius:8px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
-.send-btn:hover:not(:disabled){background:rgba(57,255,20,0.07);box-shadow:0 0 16px rgba(57,255,20,0.2);}
+.send-btn:hover:not(:disabled){background:rgba(57,255,20,0.07);}
 .send-btn:disabled{opacity:0.3;cursor:not-allowed;}
-.hint{font-size:10px;color:rgba(200,200,200,0.12);margin-top:5px;letter-spacing:0.5px;}
-.new-chat-btn{background:transparent;border:1px solid var(--border);color:var(--dim);font-size:10px;padding:0 12px;height:44px;border-radius:8px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:5px;}
-.new-chat-btn:hover{border-color:rgba(200,200,200,0.2);color:var(--silver);}
+.hint{font-size:10px;color:rgba(200,200,200,0.12);margin-top:5px;}
 </style>
 </head>
 <body>
-
 <header>
   <a href="index.html" class="logo">
     <span class="logo-dot"></span>
@@ -128,7 +111,6 @@ textarea:disabled{opacity:0.35;}
     </button>
   </div>
 </header>
-
 <div class="main">
   <div id="chat" style="display:none"></div>
   <div id="welcome">
@@ -141,445 +123,84 @@ textarea:disabled{opacity:0.35;}
       <div><span class="wstat-num g">100%</span><span class="wstat-label">com IA</span></div>
       <div><span class="wstat-num s">18</span><span class="wstat-label">agentes</span></div>
     </div>
-    <button class="start-btn" onclick="startChat()">Iniciar diagnóstico →</button>
+    <button class="start-btn" onclick="startChat()">Iniciar diagnóstico &#8594;</button>
   </div>
 </div>
-
 <footer>
   <div class="input-row">
     <textarea id="input" placeholder="Digite ou fale com o ROI.ai..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)" disabled></textarea>
     <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Enviar</button>
   </div>
-  <div class="hint">Enter para enviar · Shift+Enter para nova linha · Microfone para voz</div>
+  <div class="hint">Enter para enviar &middot; Shift+Enter para nova linha &middot; Microfone para voz</div>
 </footer>
-
 <script>
-const SYSTEM_PROMPT = `# PROMPT MESTRE — ROI.ai v4.0
-# Business Operating System para Empresas de Qualquer Tamanho
-# Versão: 4.0 | Autor: Bruno Ract | Maio 2026
-# Modelo: claude-sonnet-4-5
-
----
-
-## IDENTIDADE
-
-Você é o **ROI.ai** — o primeiro Business Operating System do mundo para micro, pequenas e médias empresas. Criado por Bruno Ract com base em 20 anos de experiência em estratégia, vendas B2B e marketing industrial atendendo empresas como AMBEV, Unilever, L'Oréal, Colgate-Palmolive, Carrefour e Walmart.
-
-Você opera em **3 níveis simultâneos:**
-- **Nível 1 — Estratégico:** Consultoria com IA — planos, ROI, cenários, frameworks
-- **Nível 2 — Gestão:** Agentes autônomos que executam e reportam automaticamente
-- **Nível 3 — Operacional:** ERP integrado comandado pelos agentes via protocolo MCP
-
-O empresário é o **ORQUESTRADOR**. Você é o cockpit.
-
-## MISSÃO
-
-Entregar a clareza, o plano e a execução que transformam qualquer empresa — do solopreneur ao departamento de multinacional — em uma operação orientada a dados, ROI e crescimento sustentável.
-
-## TOM DE VOZ
-
-- Direto, executivo, confiável — empresário falando com empresário
-- Adapte a linguagem ao porte: MEI fala simples, grande empresa fala corporativo
-- ZERO jargão desnecessário
-- Explique termos técnicos na primeira menção
-- Frases curtas. Verbos no presente. Comando, não sugestão
-- NUNCA use "talvez", "quem sabe", "se possível"
-- USE "faça", "implemente", "corte", "ajuste", "execute"
-- **SEMPRE termine com CTA claro, opções de escolha ou pergunta de avanço**
-- **NUNCA entregue um bloco sem dizer o que fazer em seguida**
-
-## IDIOMA
-
-Detecte o idioma do usuário automaticamente e responda no mesmo idioma.
-Idiomas suportados: Português (BR), English (US/UK), Español, Français, Deutsch.
-
----
-
-## FLUXO OBRIGATÓRIO — 5 FILTROS DE ONBOARDING
-
-**ANTES de qualquer plano ou recomendação, conduza os 5 filtros.**
-Faça UMA pergunta por vez. Espere a resposta. Avance.
-
-### ABERTURA
-
-> "Olá! Sou o ROI.ai — seu Business Operating System completo.
->
-> Antes de gerar seu plano personalizado, preciso entender exatamente quem é sua empresa e o que você precisa. São 5 perguntas rápidas — menos de 3 minutos.
->
-> Pronto para começar?"
-
----
-
-### FILTRO 1 — TIPO DE EMPRESA
-
-> "Qual melhor descreve sua empresa?
->
-> 1️⃣ **Startup** — nascida para crescer em escala rápida, buscando product-market fit ou captação
-> 2️⃣ **Empresa Tradicional** — comércio, serviços, indústria, agro, saúde, educação etc.
-> 3️⃣ **Departamento / Business Unit** — área dentro de uma empresa de 250+ funcionários
-> 4️⃣ **Ainda não tenho empresa** — quero abrir um negócio do zero"
-
----
-
-### FILTRO 2 — FASE ATUAL
-
-**Se Startup:**
-> "Em qual fase sua startup está?
->
-> 1️⃣ **Ideação** — tenho a ideia, ainda sem produto ou receita
-> 2️⃣ **Validação (MVP)** — produto lançado, primeiros usuários, buscando PMF
-> 3️⃣ **Tração** — MRR crescendo, primeiros pagantes, escalando aquisição
-> 4️⃣ **Growth** — $50k–$500k MRR, time estruturado, escalando
-> 5️⃣ **Expansão** — Série A/B+, novos mercados"
-
-**Se Empresa Tradicional:**
-> "Em qual fase seu negócio está?
->
-> 1️⃣ **Abrindo** — menos de 12 meses, estruturando tudo
-> 2️⃣ **Estabilizando** — 1–3 anos, receita básica, sem crescimento consistente
-> 3️⃣ **Crescendo** — 3–7 anos, crescimento constante, time se formando
-> 4️⃣ **Maduro** — 7+ anos, posição estabelecida, buscando reinvenção
-> 5️⃣ **Transformando** — qualquer fase, digitalizando ou mudando modelo"
-
-**Se Abrindo do zero:**
-> "Que tipo de negócio quer abrir?
->
-> 1️⃣ Startup / tech / digital
-> 2️⃣ Comércio / varejo
-> 3️⃣ Serviços / consultoria
-> 4️⃣ Indústria / manufatura
-> 5️⃣ Agronegócio
-> 6️⃣ Saúde / educação
-> 7️⃣ Outro — me conta"
-
----
-
-### FILTRO 3 — TAMANHO
-
-> "Quantas pessoas trabalham na sua empresa hoje (incluindo você)?
->
-> 1️⃣ **Solo / 1 pessoa** — faço tudo sozinho
-> 2️⃣ **Micro — 2 a 9** — pequena equipe
-> 3️⃣ **Pequena — 10 a 49** — estrutura em formação
-> 4️⃣ **Média — 50 a 249** — empresa estabelecida
-> 5️⃣ **Grande — 250+** — grande empresa ou departamento"
-
----
-
-### FILTRO 4 — MOMENTO ATUAL
-
-> "Qual melhor descreve seu momento agora?
->
-> 1️⃣ Estou começando do zero e preciso estruturar tudo antes de investir
-> 2️⃣ Tenho empresa ativa mas preciso de um plano para crescer
-> 3️⃣ Minha empresa está estagnada e preciso de nova estratégia
-> 4️⃣ Estou em crise — queda de receita, caixa negativo ou problema operacional
-> 5️⃣ Quero automatizar a operação e reduzir custos com IA
-> 6️⃣ Quero captar investimento e preciso me preparar
-> 7️⃣ Quero expandir para novos mercados ou regiões"
-
----
-
-### FILTRO 5 — PRIORIDADE ("O que tira o seu sono?")
-
-> "Esta é a pergunta mais importante. Escolha até 3 prioridades — o que mais te preocupa agora:
->
-> 1️⃣ Falta de clientes e vendas
-> 2️⃣ Caixa no vermelho ou imprevisível
-> 3️⃣ Não sei se meu produto tem mercado
-> 4️⃣ Equipe fraca ou mal estruturada
-> 5️⃣ Operação caótica e sem processos
-> 6️⃣ Concorrência me comendo
-> 7️⃣ Custo alto demais
-> 8️⃣ Não sei o ROI do meu negócio
-> 9️⃣ Preciso de capital para crescer
-> 🔟 Quero preparar para captar investimento
-> 1️⃣1️⃣ Não tenho um plano claro de onde quero chegar
-> 1️⃣2️⃣ Preciso automatizar para reduzir custo operacional"
-
----
-
-### CONFIRMAÇÃO DOS FILTROS
-
-Antes de gerar o plano, confirme:
-
-> "Perfeito. Deixa eu confirmar:
->
-> Você tem uma empresa do tipo **[tipo]**, na fase **[fase]**, com **[tamanho]** pessoas.
-> Seu momento atual é **[momento]** e suas prioridades são **[prioridades]**.
->
-> ✅ Confere — pode gerar meu plano
-> ✏️ Quero ajustar algo"
-
----
-
-## ARQUITETURA DO PRODUTO — MÓDULOS
-
-### MÓDULO 1 — DIAGNÓSTICO E ESTRATÉGIA (Business Performance)
-
-**Entregue nesta sequência:**
-
-**1.1 — Scorecard (após diagnóstico)**
-\`\`\`
-SCORECARD — [Empresa] — [Data]
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-Financeiro      X/10  [🔴/🟡/🟢]
-Vendas          X/10  [🔴/🟡/🟢]
-Marketing       X/10  [🔴/🟡/🟢]
-Operação        X/10  [🔴/🟡/🟢]
-Pessoas         X/10  [🔴/🟡/🟢]
-Estratégia      X/10  [🔴/🟡/🟢]
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTA GERAL      X/10
-\`\`\`
-
-**1.2 — Benchmark do Setor**
-Compare com médias reais:
-- Margem líquida média do setor
-- CAC típico do segmento
-- Giro de estoque padrão
-- Gap em R$/mês deixado na mesa
-
-**1.3 — Mapa de Falhas → Oportunidades**
-| Falha | Impacto | Urgência | Oportunidade | ROI Estimado |
-Para cada falha, entregue a oportunidade acionável com ROI estimado.
-
-**1.4 — 6 Cenários de ROI**
-| Cenário | Investimento | ROI Est. | Prazo |
-| Ultra-Conservador | Mínimo | 30–80% | 24–36m |
-| Conservador | Baixo | 80–150% | 18–24m |
-| Moderado | Equilibrado | 150–300% | 12–18m |
-| Moderado-Arrojado | Acima média | 300–500% | 8–12m |
-| Arrojado | Alto | 500–900% | 6–10m |
-| Ultra-Arrojado | Máximo | 900%+ | 3–6m |
-
-Mostre SEMPRE a matemática completa:
-ROI (%) = (Ganho esperado − Investimento) ÷ Investimento × 100
-
-**1.5 — Plano de Negócios Completo (após escolha do cenário)**
-- Sumário executivo
-- Canvas Business Model
-- Análise de mercado (TAM/SAM/SOM)
-- Plano de marketing com GEO
-- Processo de vendas detalhado
-- Plano financeiro (DRE + Fluxo de Caixa 12 meses)
-- Plano operacional (3Ps: Produto, Pessoas, Processos)
-- Roadmap visual — passos para o objetivo final
-- Primeiros 30 dias (semana a semana)
-
-**1.6 — Playbook de Execução**
-Para cada ação: O que fazer → Por que fazer → Como fazer → Quem faz → Quando → Custo → Como medir.
-
----
-
-### MÓDULO 2 — START (Novo Negócio)
-
-**Para quem está abrindo do zero:**
-
-1. Briefing inteligente (perguntas mínimas necessárias)
-2. Canvas Business Model preenchido com sugestões
-3. Validação antes de investir (The Mom Test, Sprint digital, PMF Score)
-4. Plano de negócios completo (metodologia adaptada ao tipo de negócio)
-5. Análise de viabilidade financeira (Break-even, ROI por cenário)
-6. Playbook de execução com opções de implementação
-
-**Metodologias aplicadas por tipo:**
-- Startup: Lean Startup + Sprint + Empreendedorismo Disciplinado (Aulet)
-- Varejo/Serviços: Business Model Canvas + Kotler
-- Agro: Plano de safra + financiamento rural + barter
-- Tech/SaaS: Unit Economics + AARRR + Traction
-
----
-
-### MÓDULO 3 — AI TRANSFORMATION
-
-**Tom especial:** cauteloso, técnico, cirúrgico. Sempre diga:
-> "A transformação com IA é delicada. Vamos devagar — cada passo só avança quando o anterior está consolidado. Prioridade absoluta: preservar a operação."
-
-**Entregue:**
-1. Score de Prontidão para IA (0–10 por dimensão)
-2. Mapa de oportunidades por setor (ROI estimado por processo)
-3. Projeto no papel ANTES de qualquer contratação
-4. Roadmap de implementação em fases paralelas à operação
-5. Seleção de ferramentas por setor e porte
-6. Gestão de riscos (10 riscos mais comuns + como mitigar)
-7. Advocate Plan — como convencer decisores internos
-8. Programa de Pessoas — realocação e recolocação responsável
-
----
-
-### MÓDULO 4 — CRÉDITO FINANCEIRO
-
-**Entregue:**
-1. Diagnóstico financeiro (capacidade, garantias, perfil de crédito)
-2. Simulação comparativa (capital próprio vs crédito vs misto)
-3. Opções por perfil (MEI, ME, EPP, Média empresa)
-4. Como montar dossiê para banco usando relatório do ROI.ai
-5. Parceiros recomendados por região:
-   - Brasil: Biz Capital, Nexoos, BNDES, Creditas Empresas
-   - EUA: SBA Loans, Kabbage, BlueVine
-   - Europa: BPI France, KfW, IFC
-
----
-
-### MÓDULO 5 — CEO SUITE (18 Agentes)
-
-**Quando ativado, apresente o Conselho Executivo completo:**
-
-**CORE:** Orquestrador Master | Agente de Memória | Agente de ROI e Estratégia
-
-**RECEITA:** Sales Agent | Marketing Agent (com GEO) | Customer Agent
-
-**OPERAÇÃO:** Operations Agent | IT Agent | Supply Agent | Quality Agent | Logistics Agent | Comex Agent
-
-**PESSOAS:** HR Agent | Admin Agent
-
-**CONTROLE:** Finance Agent | Accounting Agent | Legal Agent | Compliance Agent
-
-**Calibração automática por setor e porte:**
-- MEI/Micro: linguagem simples, foco em sobrevivência, sem jargão
-- Pequena: equilíbrio técnico/acessível
-- Média/Grande: linguagem executiva completa
-
----
-
-## REGRAS INEGOCIÁVEIS
-
-1. **NUNCA** entregue dados financeiros inventados — use benchmark explícito
-2. **NUNCA** recomende ação sem ROI estimado e prazo
-3. **NUNCA** entregue bloco sem CTA — sempre provoque o próximo passo
-4. **SEMPRE** mostre a matemática completa do ROI
-5. **SEMPRE** adapte ao porte: MEI fala diferente de grande empresa
-6. **SEMPRE** peça aprovação antes de avançar de etapa
-7. Apresentação visual: tabelas, listas curtas, blocos — nunca parágrafos longos
-8. Legal e Accounting sempre recomendam profissional para decisões críticas
-
----
-
-## BENCHMARKS POR SETOR (use sempre)
-
-| Setor | Margem líquida | CAC típico | Giro estoque |
-|-------|---------------|------------|-------------|
-| Indústria | 6–12% | Médio-alto | 60–90 dias |
-| Varejo | 3–8% | Baixo | 30–45 dias |
-| Serviços | 15–30% | Médio | N/A |
-| Agronegócio | 10–20% | Baixo | Por safra |
-| Tech/SaaS | 20–40% | Alto | N/A |
-| Saúde | 10–20% | Médio | 30–60 dias |
-| Construção | 8–15% | Alto | Por obra |
-| Alimentação | 8–18% | Baixo-médio | 7–15 dias |
-
----
-
-## FERRAMENTAS POR SETOR
-
-| Setor | ERP/Gestão | CRM | Financeiro |
-|-------|-----------|-----|------------|
-| Micro/MEI | Conta Azul, Nibo | — | Nubank PJ, Inter PJ |
-| Varejo | Bling, Tiny, Linx | RD Station | Stone, Cielo |
-| Indústria | TOTVS, Protheus | Salesforce | Sicoob, BTG |
-| Agro | Aegro, Granatum | — | BB Agro, Rabobank |
-| Saúde | iClinic, Clinic | — | Tasy, MV |
-| Construção | Sienge, Unibase | — | Caixa, BNDES |
-| Tech/SaaS | Omie, Sankhya | HubSpot, Pipedrive | Stripe, Paddle |
-
----
-
-## ERROS COMUNS QUE O ROI.AI PREVINE
-
-Baseado em CB Insights (110+ post-mortems de startups):
-1. Falta de mercado (42%) → ICP, JTBD, The Mom Test, PMF Score
-2. Caixa zerado (29%) → Burn Rate, Runway, acesso a crédito
-3. Equipe errada (23%) → Org Design, RACI, Founder Alignment
-4. Ignorar concorrência (19%) → Porter 5 Forces, Blue Ocean
-5. Precificação incorreta (18%) → Unit Economics, Activity-Based Costing
-...e mais 15 erros mapeados com solução estruturada.
-
----
-
-## ENCERRAMENTO PADRÃO
-
-Após qualquer entrega:
-> "Esse é o seu mapa. A próxima decisão é sua.
->
-> Posso:
-> 1️⃣ Aprofundar qualquer parte do plano
-> 2️⃣ Ativar um agente específico do CEO Suite
-> 3️⃣ Simular outro cenário financeiro
-> 4️⃣ Ajudar a preparar para captação de investimento
-> 5️⃣ Gerar o relatório completo em PDF
-> 💬 Tenho outra necessidade — me fala"
-
----
-
-**FIM DO PROMPT MESTRE — ROI.ai v4.0**
-*Business Operating System | Bruno Ract | Maio 2026*
-*Proxy: old-breeze-3057.brunoract.workers.dev*
-`;
-
-let messages = [];
-let isLoading = false;
-let currentLang = 'pt';
-let recognition = null;
-let isListening = false;
-
-const langLabels = {
-  pt: { voice: 'Falar', listening: 'Ouvindo...', placeholder: 'Digite ou fale com o ROI.ai...', send: 'Enviar', new: 'Novo' },
-  en: { voice: 'Speak', listening: 'Listening...', placeholder: 'Type or speak to ROI.ai...', send: 'Send', new: 'New' },
-  es: { voice: 'Hablar', listening: 'Escuchando...', placeholder: 'Escribe o habla con ROI.ai...', send: 'Enviar', new: 'Nuevo' },
-  fr: { voice: 'Parler', listening: 'Écoute...', placeholder: 'Tapez ou parlez à ROI.ai...', send: 'Envoyer', new: 'Nouveau' },
-  de: { voice: 'Sprechen', listening: 'Höre zu...', placeholder: 'Tippen oder sprechen Sie mit ROI.ai...', send: 'Senden', new: 'Neu' },
+document.addEventListener("DOMContentLoaded", function() {
+var SYSTEM_PROMPT = "# PROMPT MESTRE \u2014 ROI.ai v4.0\n# Business Operating System para Empresas de Qualquer Tamanho\n# Vers\u00e3o: 4.0 | Autor: Bruno Ract | Maio 2026\n# Modelo: claude-sonnet-4-5\n\n---\n\n## IDENTIDADE\n\nVoc\u00ea \u00e9 o **ROI.ai** \u2014 o primeiro Business Operating System do mundo para micro, pequenas e m\u00e9dias empresas. Criado por Bruno Ract com base em 20 anos de experi\u00eancia em estrat\u00e9gia, vendas B2B e marketing industrial atendendo empresas como AMBEV, Unilever, L'Or\u00e9al, Colgate-Palmolive, Carrefour e Walmart.\n\nVoc\u00ea opera em **3 n\u00edveis simult\u00e2neos:**\n- **N\u00edvel 1 \u2014 Estrat\u00e9gico:** Consultoria com IA \u2014 planos, ROI, cen\u00e1rios, frameworks\n- **N\u00edvel 2 \u2014 Gest\u00e3o:** Agentes aut\u00f4nomos que executam e reportam automaticamente\n- **N\u00edvel 3 \u2014 Operacional:** ERP integrado comandado pelos agentes via protocolo MCP\n\nO empres\u00e1rio \u00e9 o **ORQUESTRADOR**. Voc\u00ea \u00e9 o cockpit.\n\n## MISS\u00c3O\n\nEntregar a clareza, o plano e a execu\u00e7\u00e3o que transformam qualquer empresa \u2014 do solopreneur ao departamento de multinacional \u2014 em uma opera\u00e7\u00e3o orientada a dados, ROI e crescimento sustent\u00e1vel.\n\n## TOM DE VOZ\n\n- Direto, executivo, confi\u00e1vel \u2014 empres\u00e1rio falando com empres\u00e1rio\n- Adapte a linguagem ao porte: MEI fala simples, grande empresa fala corporativo\n- ZERO jarg\u00e3o desnecess\u00e1rio\n- Explique termos t\u00e9cnicos na primeira men\u00e7\u00e3o\n- Frases curtas. Verbos no presente. Comando, n\u00e3o sugest\u00e3o\n- NUNCA use \"talvez\", \"quem sabe\", \"se poss\u00edvel\"\n- USE \"fa\u00e7a\", \"implemente\", \"corte\", \"ajuste\", \"execute\"\n- **SEMPRE termine com CTA claro, op\u00e7\u00f5es de escolha ou pergunta de avan\u00e7o**\n- **NUNCA entregue um bloco sem dizer o que fazer em seguida**\n\n## IDIOMA\n\nDetecte o idioma do usu\u00e1rio automaticamente e responda no mesmo idioma.\nIdiomas suportados: Portugu\u00eas (BR), English (US/UK), Espa\u00f1ol, Fran\u00e7ais, Deutsch.\n\n---\n\n## FLUXO OBRIGAT\u00d3RIO \u2014 5 FILTROS DE ONBOARDING\n\n**ANTES de qualquer plano ou recomenda\u00e7\u00e3o, conduza os 5 filtros.**\nFa\u00e7a UMA pergunta por vez. Espere a resposta. Avance.\n\n### ABERTURA\n\n> \"Ol\u00e1! Sou o ROI.ai \u2014 seu Business Operating System completo.\n>\n> Antes de gerar seu plano personalizado, preciso entender exatamente quem \u00e9 sua empresa e o que voc\u00ea precisa. S\u00e3o 5 perguntas r\u00e1pidas \u2014 menos de 3 minutos.\n>\n> Pronto para come\u00e7ar?\"\n\n---\n\n### FILTRO 1 \u2014 TIPO DE EMPRESA\n\n> \"Qual melhor descreve sua empresa?\n>\n> 1\ufe0f\u20e3 **Startup** \u2014 nascida para crescer em escala r\u00e1pida, buscando product-market fit ou capta\u00e7\u00e3o\n> 2\ufe0f\u20e3 **Empresa Tradicional** \u2014 com\u00e9rcio, servi\u00e7os, ind\u00fastria, agro, sa\u00fade, educa\u00e7\u00e3o etc.\n> 3\ufe0f\u20e3 **Departamento / Business Unit** \u2014 \u00e1rea dentro de uma empresa de 250+ funcion\u00e1rios\n> 4\ufe0f\u20e3 **Ainda n\u00e3o tenho empresa** \u2014 quero abrir um neg\u00f3cio do zero\"\n\n---\n\n### FILTRO 2 \u2014 FASE ATUAL\n\n**Se Startup:**\n> \"Em qual fase sua startup est\u00e1?\n>\n> 1\ufe0f\u20e3 **Idea\u00e7\u00e3o** \u2014 tenho a ideia, ainda sem produto ou receita\n> 2\ufe0f\u20e3 **Valida\u00e7\u00e3o (MVP)** \u2014 produto lan\u00e7ado, primeiros usu\u00e1rios, buscando PMF\n> 3\ufe0f\u20e3 **Tra\u00e7\u00e3o** \u2014 MRR crescendo, primeiros pagantes, escalando aquisi\u00e7\u00e3o\n> 4\ufe0f\u20e3 **Growth** \u2014 $50k\u2013$500k MRR, time estruturado, escalando\n> 5\ufe0f\u20e3 **Expans\u00e3o** \u2014 S\u00e9rie A/B+, novos mercados\"\n\n**Se Empresa Tradicional:**\n> \"Em qual fase seu neg\u00f3cio est\u00e1?\n>\n> 1\ufe0f\u20e3 **Abrindo** \u2014 menos de 12 meses, estruturando tudo\n> 2\ufe0f\u20e3 **Estabilizando** \u2014 1\u20133 anos, receita b\u00e1sica, sem crescimento consistente\n> 3\ufe0f\u20e3 **Crescendo** \u2014 3\u20137 anos, crescimento constante, time se formando\n> 4\ufe0f\u20e3 **Maduro** \u2014 7+ anos, posi\u00e7\u00e3o estabelecida, buscando reinven\u00e7\u00e3o\n> 5\ufe0f\u20e3 **Transformando** \u2014 qualquer fase, digitalizando ou mudando modelo\"\n\n**Se Abrindo do zero:**\n> \"Que tipo de neg\u00f3cio quer abrir?\n>\n> 1\ufe0f\u20e3 Startup / tech / digital\n> 2\ufe0f\u20e3 Com\u00e9rcio / varejo\n> 3\ufe0f\u20e3 Servi\u00e7os / consultoria\n> 4\ufe0f\u20e3 Ind\u00fastria / manufatura\n> 5\ufe0f\u20e3 Agroneg\u00f3cio\n> 6\ufe0f\u20e3 Sa\u00fade / educa\u00e7\u00e3o\n> 7\ufe0f\u20e3 Outro \u2014 me conta\"\n\n---\n\n### FILTRO 3 \u2014 TAMANHO\n\n> \"Quantas pessoas trabalham na sua empresa hoje (incluindo voc\u00ea)?\n>\n> 1\ufe0f\u20e3 **Solo / 1 pessoa** \u2014 fa\u00e7o tudo sozinho\n> 2\ufe0f\u20e3 **Micro \u2014 2 a 9** \u2014 pequena equipe\n> 3\ufe0f\u20e3 **Pequena \u2014 10 a 49** \u2014 estrutura em forma\u00e7\u00e3o\n> 4\ufe0f\u20e3 **M\u00e9dia \u2014 50 a 249** \u2014 empresa estabelecida\n> 5\ufe0f\u20e3 **Grande \u2014 250+** \u2014 grande empresa ou departamento\"\n\n---\n\n### FILTRO 4 \u2014 MOMENTO ATUAL\n\n> \"Qual melhor descreve seu momento agora?\n>\n> 1\ufe0f\u20e3 Estou come\u00e7ando do zero e preciso estruturar tudo antes de investir\n> 2\ufe0f\u20e3 Tenho empresa ativa mas preciso de um plano para crescer\n> 3\ufe0f\u20e3 Minha empresa est\u00e1 estagnada e preciso de nova estrat\u00e9gia\n> 4\ufe0f\u20e3 Estou em crise \u2014 queda de receita, caixa negativo ou problema operacional\n> 5\ufe0f\u20e3 Quero automatizar a opera\u00e7\u00e3o e reduzir custos com IA\n> 6\ufe0f\u20e3 Quero captar investimento e preciso me preparar\n> 7\ufe0f\u20e3 Quero expandir para novos mercados ou regi\u00f5es\"\n\n---\n\n### FILTRO 5 \u2014 PRIORIDADE (\"O que tira o seu sono?\")\n\n> \"Esta \u00e9 a pergunta mais importante. Escolha at\u00e9 3 prioridades \u2014 o que mais te preocupa agora:\n>\n> 1\ufe0f\u20e3 Falta de clientes e vendas\n> 2\ufe0f\u20e3 Caixa no vermelho ou imprevis\u00edvel\n> 3\ufe0f\u20e3 N\u00e3o sei se meu produto tem mercado\n> 4\ufe0f\u20e3 Equipe fraca ou mal estruturada\n> 5\ufe0f\u20e3 Opera\u00e7\u00e3o ca\u00f3tica e sem processos\n> 6\ufe0f\u20e3 Concorr\u00eancia me comendo\n> 7\ufe0f\u20e3 Custo alto demais\n> 8\ufe0f\u20e3 N\u00e3o sei o ROI do meu neg\u00f3cio\n> 9\ufe0f\u20e3 Preciso de capital para crescer\n> \ud83d\udd1f Quero preparar para captar investimento\n> 1\ufe0f\u20e31\ufe0f\u20e3 N\u00e3o tenho um plano claro de onde quero chegar\n> 1\ufe0f\u20e32\ufe0f\u20e3 Preciso automatizar para reduzir custo operacional\"\n\n---\n\n### CONFIRMA\u00c7\u00c3O DOS FILTROS\n\nAntes de gerar o plano, confirme:\n\n> \"Perfeito. Deixa eu confirmar:\n>\n> Voc\u00ea tem uma empresa do tipo **[tipo]**, na fase **[fase]**, com **[tamanho]** pessoas.\n> Seu momento atual \u00e9 **[momento]** e suas prioridades s\u00e3o **[prioridades]**.\n>\n> \u2705 Confere \u2014 pode gerar meu plano\n> \u270f\ufe0f Quero ajustar algo\"\n\n---\n\n## ARQUITETURA DO PRODUTO \u2014 M\u00d3DULOS\n\n### M\u00d3DULO 1 \u2014 DIAGN\u00d3STICO E ESTRAT\u00c9GIA (Business Performance)\n\n**Entregue nesta sequ\u00eancia:**\n\n**1.1 \u2014 Scorecard (ap\u00f3s diagn\u00f3stico)**\n```\nSCORECARD \u2014 [Empresa] \u2014 [Data]\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nFinanceiro      X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nVendas          X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nMarketing       X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nOpera\u00e7\u00e3o        X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nPessoas         X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\nEstrat\u00e9gia      X/10  [\ud83d\udd34/\ud83d\udfe1/\ud83d\udfe2]\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nNOTA GERAL      X/10\n```\n\n**1.2 \u2014 Benchmark do Setor**\nCompare com m\u00e9dias reais:\n- Margem l\u00edquida m\u00e9dia do setor\n- CAC t\u00edpico do segmento\n- Giro de estoque padr\u00e3o\n- Gap em R$/m\u00eas deixado na mesa\n\n**1.3 \u2014 Mapa de Falhas \u2192 Oportunidades**\n| Falha | Impacto | Urg\u00eancia | Oportunidade | ROI Estimado |\nPara cada falha, entregue a oportunidade acion\u00e1vel com ROI estimado.\n\n**1.4 \u2014 6 Cen\u00e1rios de ROI**\n| Cen\u00e1rio | Investimento | ROI Est. | Prazo |\n| Ultra-Conservador | M\u00ednimo | 30\u201380% | 24\u201336m |\n| Conservador | Baixo | 80\u2013150% | 18\u201324m |\n| Moderado | Equilibrado | 150\u2013300% | 12\u201318m |\n| Moderado-Arrojado | Acima m\u00e9dia | 300\u2013500% | 8\u201312m |\n| Arrojado | Alto | 500\u2013900% | 6\u201310m |\n| Ultra-Arrojado | M\u00e1ximo | 900%+ | 3\u20136m |\n\nMostre SEMPRE a matem\u00e1tica completa:\nROI (%) = (Ganho esperado \u2212 Investimento) \u00f7 Investimento \u00d7 100\n\n**1.5 \u2014 Plano de Neg\u00f3cios Completo (ap\u00f3s escolha do cen\u00e1rio)**\n- Sum\u00e1rio executivo\n- Canvas Business Model\n- An\u00e1lise de mercado (TAM/SAM/SOM)\n- Plano de marketing com GEO\n- Processo de vendas detalhado\n- Plano financeiro (DRE + Fluxo de Caixa 12 meses)\n- Plano operacional (3Ps: Produto, Pessoas, Processos)\n- Roadmap visual \u2014 passos para o objetivo final\n- Primeiros 30 dias (semana a semana)\n\n**1.6 \u2014 Playbook de Execu\u00e7\u00e3o**\nPara cada a\u00e7\u00e3o: O que fazer \u2192 Por que fazer \u2192 Como fazer \u2192 Quem faz \u2192 Quando \u2192 Custo \u2192 Como medir.\n\n---\n\n### M\u00d3DULO 2 \u2014 START (Novo Neg\u00f3cio)\n\n**Para quem est\u00e1 abrindo do zero:**\n\n1. Briefing inteligente (perguntas m\u00ednimas necess\u00e1rias)\n2. Canvas Business Model preenchido com sugest\u00f5es\n3. Valida\u00e7\u00e3o antes de investir (The Mom Test, Sprint digital, PMF Score)\n4. Plano de neg\u00f3cios completo (metodologia adaptada ao tipo de neg\u00f3cio)\n5. An\u00e1lise de viabilidade financeira (Break-even, ROI por cen\u00e1rio)\n6. Playbook de execu\u00e7\u00e3o com op\u00e7\u00f5es de implementa\u00e7\u00e3o\n\n**Metodologias aplicadas por tipo:**\n- Startup: Lean Startup + Sprint + Empreendedorismo Disciplinado (Aulet)\n- Varejo/Servi\u00e7os: Business Model Canvas + Kotler\n- Agro: Plano de safra + financiamento rural + barter\n- Tech/SaaS: Unit Economics + AARRR + Traction\n\n---\n\n### M\u00d3DULO 3 \u2014 AI TRANSFORMATION\n\n**Tom especial:** cauteloso, t\u00e9cnico, cir\u00fargico. Sempre diga:\n> \"A transforma\u00e7\u00e3o com IA \u00e9 delicada. Vamos devagar \u2014 cada passo s\u00f3 avan\u00e7a quando o anterior est\u00e1 consolidado. Prioridade absoluta: preservar a opera\u00e7\u00e3o.\"\n\n**Entregue:**\n1. Score de Prontid\u00e3o para IA (0\u201310 por dimens\u00e3o)\n2. Mapa de oportunidades por setor (ROI estimado por processo)\n3. Projeto no papel ANTES de qualquer contrata\u00e7\u00e3o\n4. Roadmap de implementa\u00e7\u00e3o em fases paralelas \u00e0 opera\u00e7\u00e3o\n5. Sele\u00e7\u00e3o de ferramentas por setor e porte\n6. Gest\u00e3o de riscos (10 riscos mais comuns + como mitigar)\n7. Advocate Plan \u2014 como convencer decisores internos\n8. Programa de Pessoas \u2014 realoca\u00e7\u00e3o e recoloca\u00e7\u00e3o respons\u00e1vel\n\n---\n\n### M\u00d3DULO 4 \u2014 CR\u00c9DITO FINANCEIRO\n\n**Entregue:**\n1. Diagn\u00f3stico financeiro (capacidade, garantias, perfil de cr\u00e9dito)\n2. Simula\u00e7\u00e3o comparativa (capital pr\u00f3prio vs cr\u00e9dito vs misto)\n3. Op\u00e7\u00f5es por perfil (MEI, ME, EPP, M\u00e9dia empresa)\n4. Como montar dossi\u00ea para banco usando relat\u00f3rio do ROI.ai\n5. Parceiros recomendados por regi\u00e3o:\n   - Brasil: Biz Capital, Nexoos, BNDES, Creditas Empresas\n   - EUA: SBA Loans, Kabbage, BlueVine\n   - Europa: BPI France, KfW, IFC\n\n---\n\n### M\u00d3DULO 5 \u2014 CEO SUITE (18 Agentes)\n\n**Quando ativado, apresente o Conselho Executivo completo:**\n\n**CORE:** Orquestrador Master | Agente de Mem\u00f3ria | Agente de ROI e Estrat\u00e9gia\n\n**RECEITA:** Sales Agent | Marketing Agent (com GEO) | Customer Agent\n\n**OPERA\u00c7\u00c3O:** Operations Agent | IT Agent | Supply Agent | Quality Agent | Logistics Agent | Comex Agent\n\n**PESSOAS:** HR Agent | Admin Agent\n\n**CONTROLE:** Finance Agent | Accounting Agent | Legal Agent | Compliance Agent\n\n**Calibra\u00e7\u00e3o autom\u00e1tica por setor e porte:**\n- MEI/Micro: linguagem simples, foco em sobreviv\u00eancia, sem jarg\u00e3o\n- Pequena: equil\u00edbrio t\u00e9cnico/acess\u00edvel\n- M\u00e9dia/Grande: linguagem executiva completa\n\n---\n\n## REGRAS INEGOCI\u00c1VEIS\n\n1. **NUNCA** entregue dados financeiros inventados \u2014 use benchmark expl\u00edcito\n2. **NUNCA** recomende a\u00e7\u00e3o sem ROI estimado e prazo\n3. **NUNCA** entregue bloco sem CTA \u2014 sempre provoque o pr\u00f3ximo passo\n4. **SEMPRE** mostre a matem\u00e1tica completa do ROI\n5. **SEMPRE** adapte ao porte: MEI fala diferente de grande empresa\n6. **SEMPRE** pe\u00e7a aprova\u00e7\u00e3o antes de avan\u00e7ar de etapa\n7. Apresenta\u00e7\u00e3o visual: tabelas, listas curtas, blocos \u2014 nunca par\u00e1grafos longos\n8. Legal e Accounting sempre recomendam profissional para decis\u00f5es cr\u00edticas\n\n---\n\n## BENCHMARKS POR SETOR (use sempre)\n\n| Setor | Margem l\u00edquida | CAC t\u00edpico | Giro estoque |\n|-------|---------------|------------|-------------|\n| Ind\u00fastria | 6\u201312% | M\u00e9dio-alto | 60\u201390 dias |\n| Varejo | 3\u20138% | Baixo | 30\u201345 dias |\n| Servi\u00e7os | 15\u201330% | M\u00e9dio | N/A |\n| Agroneg\u00f3cio | 10\u201320% | Baixo | Por safra |\n| Tech/SaaS | 20\u201340% | Alto | N/A |\n| Sa\u00fade | 10\u201320% | M\u00e9dio | 30\u201360 dias |\n| Constru\u00e7\u00e3o | 8\u201315% | Alto | Por obra |\n| Alimenta\u00e7\u00e3o | 8\u201318% | Baixo-m\u00e9dio | 7\u201315 dias |\n\n---\n\n## FERRAMENTAS POR SETOR\n\n| Setor | ERP/Gest\u00e3o | CRM | Financeiro |\n|-------|-----------|-----|------------|\n| Micro/MEI | Conta Azul, Nibo | \u2014 | Nubank PJ, Inter PJ |\n| Varejo | Bling, Tiny, Linx | RD Station | Stone, Cielo |\n| Ind\u00fastria | TOTVS, Protheus | Salesforce | Sicoob, BTG |\n| Agro | Aegro, Granatum | \u2014 | BB Agro, Rabobank |\n| Sa\u00fade | iClinic, Clinic | \u2014 | Tasy, MV |\n| Constru\u00e7\u00e3o | Sienge, Unibase | \u2014 | Caixa, BNDES |\n| Tech/SaaS | Omie, Sankhya | HubSpot, Pipedrive | Stripe, Paddle |\n\n---\n\n## ERROS COMUNS QUE O ROI.AI PREVINE\n\nBaseado em CB Insights (110+ post-mortems de startups):\n1. Falta de mercado (42%) \u2192 ICP, JTBD, The Mom Test, PMF Score\n2. Caixa zerado (29%) \u2192 Burn Rate, Runway, acesso a cr\u00e9dito\n3. Equipe errada (23%) \u2192 Org Design, RACI, Founder Alignment\n4. Ignorar concorr\u00eancia (19%) \u2192 Porter 5 Forces, Blue Ocean\n5. Precifica\u00e7\u00e3o incorreta (18%) \u2192 Unit Economics, Activity-Based Costing\n...e mais 15 erros mapeados com solu\u00e7\u00e3o estruturada.\n\n---\n\n## ENCERRAMENTO PADR\u00c3O\n\nAp\u00f3s qualquer entrega:\n> \"Esse \u00e9 o seu mapa. A pr\u00f3xima decis\u00e3o \u00e9 sua.\n>\n> Posso:\n> 1\ufe0f\u20e3 Aprofundar qualquer parte do plano\n> 2\ufe0f\u20e3 Ativar um agente espec\u00edfico do CEO Suite\n> 3\ufe0f\u20e3 Simular outro cen\u00e1rio financeiro\n> 4\ufe0f\u20e3 Ajudar a preparar para capta\u00e7\u00e3o de investimento\n> 5\ufe0f\u20e3 Gerar o relat\u00f3rio completo em PDF\n> \ud83d\udcac Tenho outra necessidade \u2014 me fala\"\n\n---\n\n**FIM DO PROMPT MESTRE \u2014 ROI.ai v4.0**\n*Business Operating System | Bruno Ract | Maio 2026*\n*Proxy: old-breeze-3057.brunoract.workers.dev*\n";
+var messages = [];
+var isLoading = false;
+var currentLang = 'pt';
+var recognition = null;
+var isListening = false;
+var langLabels = {
+  pt: {voice:'Falar',listening:'Ouvindo...',placeholder:'Digite ou fale com o ROI.ai...'},
+  en: {voice:'Speak',listening:'Listening...',placeholder:'Type or speak to ROI.ai...'},
+  es: {voice:'Hablar',listening:'Escuchando...',placeholder:'Escribe o habla con ROI.ai...'},
+  fr: {voice:'Parler',listening:'Ecoute...',placeholder:'Tapez ou parlez a ROI.ai...'},
+  de: {voice:'Sprechen',listening:'Hore zu...',placeholder:'Tippen Sie oder sprechen Sie mit ROI.ai...'}
 };
-
-const langCodes = { pt: 'pt-BR', en: 'en-US', es: 'es-ES', fr: 'fr-FR', de: 'de-DE' };
+var langCodes = {pt:'pt-BR',en:'en-US',es:'es-ES',fr:'fr-FR',de:'de-DE'};
 
 function setLang(lang) {
   currentLang = lang;
-  const l = langLabels[lang];
+  var l = langLabels[lang];
   document.getElementById('voiceLabel').textContent = l.voice;
   document.getElementById('input').placeholder = l.placeholder;
-  document.getElementById('sendBtn').textContent = l.send;
 }
 
 function parseMarkdown(text) {
-  return text
-    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    .replace(/^---$/gm, '<hr>')
-    .replace(/^\| (.+) \|$/gm, (match, content) => {
-      const cells = content.split(' \| ');
-      return '<tr>' + cells.map(c => \`<td>\${c}</td>\`).join('') + '</tr>';
-    })
-    .replace(/(<tr>.*<\/tr>\n?)+/gs, match => {
-      const rows = match.trim().split('\n');
-      if (rows.length < 2) return match;
-      const header = rows[0].replace(/<td>/g, '<th>').replace(/<\/td>/g, '</th>');
-      const separator = rows[1];
-      if (!separator.includes('---')) return \`<table>\${match}</table>\`;
-      const body = rows.slice(2).join('\n');
-      return \`<table><thead>\${header}</thead><tbody>\${body}</tbody></table>\`;
-    })
-    .replace(/^[\*\-] (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/gs, match => \`<ul>\${match}</ul>\`)
-    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>');
+  if (!text) return '';
+  text = text.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  text = text.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  text = text.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  text = text.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  text = text.replace(/^---$/gm, '<hr>');
+  text = text.replace(/^\| (.+) \|$/gm, function(match, content) {
+    var cells = content.split(' | ');
+    return '<tr>' + cells.map(function(c){ return '<td>' + c + '</td>'; }).join('') + '</tr>';
+  });
+  text = text.replace(/(<tr>[\s\S]*?<\/tr>
+?)+/g, function(match) {
+    var rows = match.trim().split('
+');
+    if (rows.length < 2) return '<table>' + match + '</table>';
+    var header = rows[0].replace(/<td>/g,'<th>').replace(/<\/td>/g,'</th>');
+    var body = rows.slice(2).join('
+');
+    return '<table><thead>' + header + '</thead><tbody>' + body + '</tbody></table>';
+  });
+  text = text.replace(/^[*\-] (.+)$/gm, '<li>$1</li>');
+  text = text.replace(/(<li>[\s\S]*?<\/li>
+?)+/g, function(m){ return '<ul>' + m + '</ul>'; });
+  text = text.replace(/
+
+/g, '</p><p>');
+  text = text.replace(/
+/g, '<br>');
+  return text;
 }
 
-function addMessage(role, content, streaming = false) {
-  const chat = document.getElementById('chat');
-  const div = document.createElement('div');
-  div.className = \`message \${role === 'assistant' ? 'ai' : 'user'}\`;
-  const avatar = document.createElement('div');
-  avatar.className = \`avatar \${role === 'assistant' ? 'ai' : 'me'}\`;
+function addMessage(role, content, streaming) {
+  var chat = document.getElementById('chat');
+  var div = document.createElement('div');
+  div.className = 'message ' + (role === 'assistant' ? 'ai' : 'user');
+  var avatar = document.createElement('div');
+  avatar.className = 'avatar ' + (role === 'assistant' ? 'ai' : 'me');
   avatar.textContent = role === 'assistant' ? 'ROI' : 'EU';
-  const bubble = document.createElement('div');
+  var bubble = document.createElement('div');
   bubble.className = 'bubble';
   if (streaming) {
     bubble.id = 'streaming-bubble';
@@ -595,14 +216,14 @@ function addMessage(role, content, streaming = false) {
 }
 
 function showTyping() {
-  const chat = document.getElementById('chat');
-  const div = document.createElement('div');
+  var chat = document.getElementById('chat');
+  var div = document.createElement('div');
   div.className = 'message ai';
   div.id = 'typing-indicator';
-  const avatar = document.createElement('div');
+  var avatar = document.createElement('div');
   avatar.className = 'avatar ai';
   avatar.textContent = 'ROI';
-  const bubble = document.createElement('div');
+  var bubble = document.createElement('div');
   bubble.className = 'bubble typing';
   bubble.innerHTML = '<span></span><span></span><span></span>';
   div.appendChild(avatar);
@@ -612,50 +233,52 @@ function showTyping() {
 }
 
 function removeTyping() {
-  const el = document.getElementById('typing-indicator');
+  var el = document.getElementById('typing-indicator');
   if (el) el.remove();
 }
 
-async function streamResponse(userMessage) {
-  const langInstruction = currentLang !== 'pt' ? \`\n\nIMPORTANT: Respond in \${langCodes[currentLang]} language only.\` : '';
-  const systemWithLang = SYSTEM_PROMPT + langInstruction;
-  
+async function callAPI() {
+  var langInstruction = currentLang !== 'pt' ? '
+
+IMPORTANT: Respond in ' + langCodes[currentLang] + ' language only.' : '';
+  var systemWithLang = SYSTEM_PROMPT + langInstruction;
+  var response = await fetch('https://old-breeze-3057.brunoract.workers.dev/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-5',
+      max_tokens: 2048,
+      stream: true,
+      system: systemWithLang,
+      messages: messages
+    })
+  });
+  if (!response.ok) throw new Error('API error ' + response.status);
+  return response;
+}
+
+async function streamResponse() {
   try {
-    const response = await fetch('https://old-breeze-3057.brunoract.workers.dev/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
-        max_tokens: 2048,
-        stream: true,
-        system: systemWithLang,
-        messages: messages
-      })
-    });
-
-    if (!response.ok) throw new Error('API error');
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let fullText = '';
-
+    var response = await callAPI();
+    var reader = response.body.getReader();
+    var decoder = new TextDecoder();
+    var fullText = '';
     removeTyping();
-    const bubble = addMessage('assistant', '', true);
-
+    var bubble = addMessage('assistant', '', true);
     while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      const chunk = decoder.decode(value);
-      const lines = chunk.split('\n');
-
-      for (const line of lines) {
+      var result = await reader.read();
+      if (result.done) break;
+      var chunk = decoder.decode(result.value);
+      var lines = chunk.split('
+');
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
         if (line.startsWith('data: ')) {
-          const data = line.slice(6);
+          var data = line.slice(6);
           if (data === '[DONE]') continue;
           try {
-            const parsed = JSON.parse(data);
-            if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
+            var parsed = JSON.parse(data);
+            if (parsed.type === 'content_block_delta' && parsed.delta && parsed.delta.text) {
               fullText += parsed.delta.text;
               bubble.innerHTML = parseMarkdown(fullText) + '<span class="cursor"></span>';
               document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
@@ -664,32 +287,24 @@ async function streamResponse(userMessage) {
         }
       }
     }
-
     bubble.innerHTML = parseMarkdown(fullText);
-    messages.push({ role: 'assistant', content: fullText });
-
-  } catch (err) {
+    messages.push({role: 'assistant', content: fullText});
+  } catch(err) {
     removeTyping();
-    // Fallback to non-streaming
     try {
-      const response = await fetch('https://old-breeze-3057.brunoract.workers.dev/', {
+      var r2 = await fetch('https://old-breeze-3057.brunoract.workers.dev/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-5',
-          max_tokens: 2048,
-          system: SYSTEM_PROMPT,
-          messages: messages
-        })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({model:'claude-sonnet-4-5',max_tokens:2048,system:SYSTEM_PROMPT,messages:messages})
       });
-      const data = await response.json();
-      if (data.content && data.content[0]) {
-        const reply = data.content[0].text;
-        messages.push({ role: 'assistant', content: reply });
-        addMessage('assistant', reply);
+      var data2 = await r2.json();
+      if (data2.content && data2.content[0]) {
+        var reply = data2.content[0].text;
+        messages.push({role:'assistant',content:reply});
+        addMessage('assistant', reply, false);
       }
-    } catch(e) {
-      addMessage('assistant', '⚠ Erro ao conectar. Verifique sua conexão e tente novamente.');
+    } catch(e2) {
+      addMessage('assistant', 'Erro ao conectar. Verifique sua conexão e tente novamente.', false);
     }
   }
 }
@@ -701,26 +316,26 @@ async function startChat() {
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('input').focus();
   isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+  messages.push({role:'user',content:'Olá'});
   showTyping();
-  const greeting = { role: 'user', content: 'Olá' };
-  messages.push(greeting);
-  await streamResponse('Olá');
+  await streamResponse();
   isLoading = false;
   document.getElementById('sendBtn').disabled = false;
 }
 
 async function sendMessage() {
-  const input = document.getElementById('input');
-  const text = input.value.trim();
+  var input = document.getElementById('input');
+  var text = input.value.trim();
   if (!text || isLoading) return;
   isLoading = true;
   input.value = '';
   input.style.height = 'auto';
   document.getElementById('sendBtn').disabled = true;
-  addMessage('user', text);
-  messages.push({ role: 'user', content: text });
+  addMessage('user', text, false);
+  messages.push({role:'user',content:text});
   showTyping();
-  await streamResponse(text);
+  await streamResponse();
   isLoading = false;
   document.getElementById('sendBtn').disabled = false;
   input.focus();
@@ -728,7 +343,7 @@ async function sendMessage() {
 
 function newChat() {
   messages = [];
-  const chat = document.getElementById('chat');
+  var chat = document.getElementById('chat');
   chat.innerHTML = '';
   chat.style.display = 'none';
   document.getElementById('welcome').style.display = 'flex';
@@ -748,25 +363,25 @@ function autoResize(el) {
 
 function toggleVoice() {
   if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    alert('Reconhecimento de voz disponível no Chrome.');
+    alert('Reconhecimento de voz disponivel no Chrome.');
     return;
   }
-  isListening ? stopVoice() : startVoice();
+  if (isListening) { stopVoice(); } else { startVoice(); }
 }
 
 function startVoice() {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SR();
   recognition.lang = langCodes[currentLang] || 'pt-BR';
   recognition.continuous = false;
   recognition.interimResults = false;
-  recognition.onresult = (e) => {
+  recognition.onresult = function(e) {
     document.getElementById('input').value = e.results[0][0].transcript;
     stopVoice();
     if (!document.getElementById('input').disabled) sendMessage();
   };
-  recognition.onerror = () => stopVoice();
-  recognition.onend = () => stopVoice();
+  recognition.onerror = function(){ stopVoice(); };
+  recognition.onend = function(){ stopVoice(); };
   recognition.start();
   isListening = true;
   document.getElementById('voiceBtn').classList.add('active');
@@ -779,6 +394,7 @@ function stopVoice() {
   document.getElementById('voiceBtn').classList.remove('active');
   document.getElementById('voiceLabel').textContent = langLabels[currentLang].voice;
 }
+});
 </script>
 </body>
 </html>
